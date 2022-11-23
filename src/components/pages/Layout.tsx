@@ -1,10 +1,11 @@
 import React from "react";
 import { Global, css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../ui/Navbar";
 
-const reset = css`
+export const reset = css`
   * {
     box-sizing: border-box;
     margin: 0;
@@ -13,7 +14,7 @@ const reset = css`
 
   body {
     font-family: "Roboto", sans-serif;
-    padding: 0 10em;
+    position: relative;
   }
 
   a {
@@ -24,6 +25,20 @@ const reset = css`
   li {
     list-style: none;
   }
+
+  /* signature color */
+  .text-signature-color {
+    color: rgba(255, 143, 0, 1);
+  }
+
+  .bg-signature-color {
+    color: rgba(255, 143, 0, 1);
+  }
+`;
+
+const MainLayout = styled.main`
+  margin-top: 80px;
+  padding: 0 5em;
 `;
 
 export default function Layout() {
@@ -31,9 +46,9 @@ export default function Layout() {
     <>
       <Global styles={reset} />
       <Navbar />
-      <main>
+      <MainLayout>
         <Outlet />
-      </main>
+      </MainLayout>
     </>
   );
 }

@@ -1,5 +1,10 @@
 import React from "react";
+import Hero from "./Hero";
 
 export default function WelcomePage() {
-  return <h1>This is welcome page</h1>;
+  return (
+    <>
+      <Hero />
+    </>
+  );
 }

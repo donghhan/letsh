@@ -6,7 +6,9 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { Path } from "./utils/Path";
+import theme from "./theme";
 import HomeLayout from "./components/pages/Layout";
 import AuthLayout from "./components/pages/users/auth/AuthLayout";
 import NotFoundPage from "./components/pages/etc/NotFoundPage";
@@ -15,7 +17,7 @@ import LoginPage from "./components/pages/users/auth/Login";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: Path.home,
     element: <HomeLayout />,
     errorElement: <NotFoundPage />,
     children: [
@@ -31,7 +33,8 @@ const container = document.getElementById("app");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>

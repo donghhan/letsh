@@ -1,8 +1,14 @@
 import React from "react";
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  useColorMode,
+  IconButton,
+  HStack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import { TbHotelService } from "react-icons/tb";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
 const Header = styled.header`
   width: 100%;
@@ -10,9 +16,11 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1em;
+  padding: 0 1.5em;
   z-index: 1000;
-  background-color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
 
   nav {
     width: 100%;
@@ -48,14 +56,10 @@ const LogoText = styled(Link)`
   color: #ff8f00;
 `;
 
-const AuthButton = styled(Link)`
-  background-color: #000;
-  color: #fff;
-  border-radius: 5px;
-  padding: 0.5rem 1.5rem;
-`;
-
 export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const DarkModeToggleImage = useColorModeValue(BsFillMoonFill, BsFillSunFill);
+
   return (
     <Header>
       <LogoText to="/">Let'sh</LogoText>
@@ -77,15 +81,35 @@ export default function Navbar() {
             <NavLink to="/">Transportation</NavLink>
           </li>
         </ul>
-        <ul className="extra-links">
+        <HStack className="extra-links">
           <li>
-            <NavLink to="/">Become a Host</NavLink>
+            <NavLink to="/">Become Host</NavLink>
           </li>
           <li>
-            <NavLink to="/">Find Roommate</NavLink>
+            <NavLink to="/">Find My Mate</NavLink>
           </li>
-          <AuthButton to="/">Sign in</AuthButton>
-        </ul>
+          <IconButton
+            aria-label="dark-mode-toggle"
+            colorScheme={colorMode === "light" ? "gray" : "whiteAlpha"}
+            icon={<DarkModeToggleImage />}
+            color={colorMode === "light" ? "gray" : "white"}
+            onClick={toggleColorMode}
+          />
+          <Link to="/">
+            <Button
+              color="white"
+              bg={colorMode === "light" ? "black" : "orange.500"}
+              width="7rem"
+              fontWeight={"normal"}
+              _hover={{ bg: colorMode === "light" ? "gray" : "orange.400" }}
+              _active={{
+                bg: colorMode === "light" ? "gray.700" : "orange.700",
+              }}
+            >
+              Sign in
+            </Button>
+          </Link>
+        </HStack>
       </nav>
     </Header>
   );
