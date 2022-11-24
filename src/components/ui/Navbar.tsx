@@ -98,13 +98,12 @@ export default function Navbar() {
           <Link to="/">
             <Button
               color="white"
-              bg={colorMode === "light" ? "black" : "orange.500"}
+              bg="orange.500"
               width="7rem"
               fontWeight={"normal"}
-              _hover={{ bg: colorMode === "light" ? "gray" : "orange.400" }}
-              _active={{
-                bg: colorMode === "light" ? "gray.700" : "orange.700",
-              }}
+              _hover={{ bg: "orange.400" }}
+              _active={{ bg: "orange.700" }}
+              boxShadow="0px 8px 15px rgba(0, 0, 0, .3)"
             >
               Sign in
             </Button>

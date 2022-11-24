@@ -25,20 +25,11 @@ export const reset = css`
   li {
     list-style: none;
   }
-
-  /* signature color */
-  .text-signature-color {
-    color: rgba(255, 143, 0, 1);
-  }
-
-  .bg-signature-color {
-    color: rgba(255, 143, 0, 1);
-  }
 `;
 
 const MainLayout = styled.main`
   margin-top: 80px;
-  padding: 0 5em;
+  padding: 0 15em;
 `;
 
 export default function Layout() {
