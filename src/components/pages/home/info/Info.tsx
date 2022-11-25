@@ -54,10 +54,12 @@ export default function Info() {
             Houses
           </Text>
         </GridItem>
-        <GridItem>
+        <GridItem w="100%" h="100%">
           <Box width="100%" height="100%" overflow="hidden">
             <Image
               src={hotel.default}
+              width="100%"
+              height="100%"
               objectFit="cover"
               borderTopLeftRadius="40%"
               borderBottomRightRadius="40%"
