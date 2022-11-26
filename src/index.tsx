@@ -9,11 +9,11 @@ import {
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { Path } from "./utils/Path";
 import theme from "./theme";
-import HomeLayout from "./components/pages/Layout";
-import AuthLayout from "./components/pages/users/auth/AuthLayout";
-import NotFoundPage from "./components/pages/etc/NotFoundPage";
-import WelcomePage from "./components/pages/home/WelcomePage";
-import LoginPage from "./components/pages/users/auth/Login";
+import HomeLayout from "./components/layouts/Layout";
+import AuthLayout from "./pages/users/auth/AuthLayout";
+import NotFoundPage from "./pages/etc/NotFoundPage";
+import WelcomePage from "./pages/HomePage";
+import LoginPage from "./pages/users/auth/Login";
 
 const router = createBrowserRouter([
   {
