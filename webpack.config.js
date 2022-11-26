@@ -27,7 +27,7 @@ module.exports = {
       progress: true,
     },
     compress: true,
-    hot: true,
+    hot: "only",
     port: "auto",
   },
   devtool: isProductionMode ? false : "eval",
