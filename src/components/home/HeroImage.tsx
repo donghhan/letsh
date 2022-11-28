@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
-import { Image } from "@chakra-ui/react";
-import { GiCurledLeaf, GiTreeBranch } from "react-icons/gi";
+import { GiTreeBranch } from "react-icons/gi";
 import heroImage from "../../assets/images/hero_image.png";
-import vineIcon from "../../assets/images/vine_icon.png";
 
 const ImageWrapper = styled.div`
   position: relative;

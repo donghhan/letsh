@@ -4,10 +4,12 @@ import { Title, SimpleTitle } from "../components/home/Title";
 import HeroImage from "../components/home/HeroImage";
 import InfoGrid from "../components/home/InfoGrid";
 import * as freelancer from "../assets/images/freelancer.svg";
+import WhyChooseUsFlexItems from "../components/home/WhyChooseUs";
+import { GiTreeBranch } from "react-icons/gi";
+import * as woman from "../assets/images/woman.svg";
 
 const CommonSection = styled.section`
   width: 100%;
-  min-height: 100vh;
   display: flex;
   position: relative;
   padding: 0 10em;
@@ -22,6 +24,7 @@ const CommonSection = styled.section`
 `;
 
 const HeroSection = styled(CommonSection)`
+  min-height: 100vh;
   justify-content: space-between;
   align-items: center;
 
@@ -33,13 +36,27 @@ const HeroSection = styled(CommonSection)`
 
 const InfoGridSection = styled(CommonSection)`
   flex-direction: column;
+  margin-bottom: 200px;
+`;
+
+const HowItWorksSection = styled(CommonSection)`
+  margin-bottom: 200px;
+`;
+
+const WhyPeopleChooseUsSection = styled(CommonSection)`
+  justify-content: space-around;
+
+  .image-section {
+    width: 400px;
+    height: 500px;
+  }
 `;
 
 export default function HomePage() {
   return (
     <main>
       {/* Hero Section */}
-      <HeroSection id="hero">
+      <HeroSection>
         <div className="paragraph">
           <Title mainTitlePrefix="Start Living" mainTitle="Move On" />
           <div className="text">
@@ -73,33 +90,55 @@ export default function HomePage() {
       </InfoGridSection>
 
       {/* How Does It Works Section */}
-      <Flex
-        mt="200px"
-        py="100px"
-        bgColor="orange.400"
-        borderTopRightRadius="60px"
-        borderBottomLeftRadius="60px"
-        justifyContent="center"
-      >
-        <Container>
-          <Image src={freelancer.default} alt="freelancer" />
-        </Container>
-        <Container>
-          <Box>
-            <Text fontWeight="bold" fontSize="3.5rem" mb="20px" color="black">
-              How does it works
-            </Text>
-            <Text color="black" lineHeight="2rem" fontSize="1.115rem">
-              Rent is a free you pay in exchange for the use of someone's
-              property. Apartment rent gives you theright to occupy a
-              residential apartment and the terms of your occupancy are
-              dsecribed in the lease. Some of the things a lease covers are the
-              amount of rent, when it's due and fees or penalties for late
-              payment as well as any tenant restrictions.
-            </Text>
+      <HowItWorksSection>
+        <Flex
+          width="100%"
+          py="100px"
+          bgColor="orange.400"
+          borderTopRightRadius="60px"
+          borderBottomLeftRadius="60px"
+          justifyContent="center"
+        >
+          <Container>
+            <Image src={freelancer.default} alt="freelancer" />
+          </Container>
+          <Container>
+            <Box>
+              <Text fontWeight="bold" fontSize="3.5rem" mb="20px" color="black">
+                How does it works
+              </Text>
+              <Text color="black" lineHeight="2rem" fontSize="1.115rem">
+                Rent is a free you pay in exchange for the use of someone's
+                property. Apartment rent gives you theright to occupy a
+                residential apartment and the terms of your occupancy are
+                dsecribed in the lease. Some of the things a lease covers are
+                the amount of rent, when it's due and fees or penalties for late
+                payment as well as any tenant restrictions.
+              </Text>
+            </Box>
+          </Container>
+        </Flex>
+      </HowItWorksSection>
+
+      {/* Why People Choose Us Section */}
+      <WhyPeopleChooseUsSection>
+        <Container
+          bgColor="orange.400"
+          width="400px"
+          height="500px"
+          paddingInlineStart={0}
+          paddingInlineEnd={0}
+          margin={0}
+          borderTopLeftRadius="50px"
+          borderBottomRightRadius="50px"
+          position="relative"
+        >
+          <Box position="absolute" top="50px" right="-200px" width="500px">
+            <Image src={woman.default} alt="selfie" />
           </Box>
         </Container>
-      </Flex>
+        <WhyChooseUsFlexItems />
+      </WhyPeopleChooseUsSection>
     </main>
   );
 }
