@@ -19,16 +19,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "public"),
     },
-    client: {
-      overlay: {
-        errors: true,
-        warnings: false,
-      },
-      progress: true,
-    },
     compress: true,
-    hot: false,
-    liveReload: true,
+    hot: true,
+    liveReload: false,
     port: "auto",
   },
   devtool: isProductionMode ? false : "eval",

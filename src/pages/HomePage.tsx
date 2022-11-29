@@ -121,11 +121,11 @@ export default function HomePage() {
       </HowItWorksSection>
 
       {/* Why People Choose Us Section */}
-      <WhyPeopleChooseUsSection>
-        <Container
+      <Flex px="10em" w="100%" justify="space-around" my="5em">
+        <Box
           bgColor="orange.400"
-          width="400px"
-          height="500px"
+          w="400px"
+          h="500px"
           paddingInlineStart={0}
           paddingInlineEnd={0}
           margin={0}
@@ -136,9 +136,9 @@ export default function HomePage() {
           <Box position="absolute" top="50px" right="-200px" width="500px">
             <Image src={woman.default} alt="selfie" />
           </Box>
-        </Container>
+        </Box>
         <WhyChooseUsFlexItems />
-      </WhyPeopleChooseUsSection>
+      </Flex>
     </main>
   );
 }
