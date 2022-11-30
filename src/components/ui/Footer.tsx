@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Text, Flex, Link } from "@chakra-ui/react";
+import { HStack, Text, Flex, Link as StyledLink } from "@chakra-ui/react";
 import { AiFillInstagram, AiFillFacebook } from "react-icons/ai";
 
 export default function Footer() {
@@ -32,29 +32,29 @@ export default function Footer() {
         </Text>
       </Flex>
       <Flex flexDirection="column" justify="space-between" h="100%">
-        <Link>About Us</Link>
-        <Link>Reviews</Link>
-        <Link>Become a host</Link>
-        <Link>Find Roommate</Link>
+        <StyledLink>About Us</StyledLink>
+        <StyledLink>Reviews</StyledLink>
+        <StyledLink>Become a host</StyledLink>
+        <StyledLink>Find Roommate</StyledLink>
       </Flex>
       <Flex flexDirection="column" justify="space-between" h="100%">
-        <Link>Rooms</Link>
-        <Link>Houses</Link>
-        <Link>Find a hotel</Link>
-        <Link>Transportation</Link>
-        <Link>Parking</Link>
+        <StyledLink>Rooms</StyledLink>
+        <StyledLink>Houses</StyledLink>
+        <StyledLink>Find a hotel</StyledLink>
+        <StyledLink>Transportation</StyledLink>
+        <StyledLink>Parking</StyledLink>
       </Flex>
       <Flex flexDirection="column" justify="space-between" h="100%">
-        <Link>info@letsh.com</Link>
-        <Link>Privacy Policy</Link>
-        <Link>Terms & Conditions</Link>
+        <StyledLink>info@letsh.com</StyledLink>
+        <StyledLink>Privacy Policy</StyledLink>
+        <StyledLink>Terms & Conditions</StyledLink>
         <HStack fontSize="2rem">
-          <Link>
+          <StyledLink>
             <AiFillInstagram />
-          </Link>
-          <Link>
+          </StyledLink>
+          <StyledLink>
             <AiFillFacebook />
-          </Link>
+          </StyledLink>
         </HStack>
       </Flex>
     </Flex>

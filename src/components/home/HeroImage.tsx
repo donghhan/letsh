@@ -1,68 +1,82 @@
 import styled from "@emotion/styled";
+import { Image, Container, Flex, Box } from "@chakra-ui/react";
 import { GiTreeBranch } from "react-icons/gi";
 import heroImage from "../../assets/images/hero_image.png";
 
-const ImageWrapper = styled.div`
-  position: relative;
-  max-width: 1000px;
-  min-height: 600px;
-  display: flex;
-  gap: 20px;
-
-  .image-box {
-    width: 300px;
-    background-repeat: no-repeat;
-    position: relative;
-  }
-
-  .box1 {
-    height: 500px;
-    border-top-left-radius: 200px;
-    border-bottom-right-radius: 200px;
-    background-position: 20% 20%;
-  }
-
-  .box2 {
-    height: 300px;
-    border-top-left-radius: 150px;
-    border-bottom-right-radius: 150px;
-    background-position: 50% 40%;
-  }
-
-  .box3 {
-    height: 500px;
-    position: absolute;
-    right: 0;
-    bottom: -220px;
-    border-top-left-radius: 200px;
-    border-bottom-right-radius: 200px;
-    background-position: 75% 85%;
-  }
-`;
-
-const StyledIconBackground = styled(GiTreeBranch)`
-  font-size: 10rem;
-  transform: rotate(180deg);
-  position: absolute;
-  left: -100px;
-`;
+const StyledIconBackground = styled(GiTreeBranch)``;
 
 export default function HeroImage() {
   return (
-    <ImageWrapper>
-      <StyledIconBackground />
-      <div
-        className="image-box box1"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      ></div>
-      <div
-        className="image-box box2"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      ></div>
-      <div
-        className="image-box box3"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      ></div>
-    </ImageWrapper>
+    <Flex
+      as="div"
+      maxW="1000px"
+      minH="600px"
+      position="relative"
+      gap="20px"
+      mt={{ md: "100px" }}
+    >
+      <Box
+        position="absolute"
+        left={{
+          md: "-90px",
+          xl: "-120px",
+          "2xl": "-120px",
+        }}
+        zIndex="-10"
+        fontSize={{
+          md: "7rem",
+          xl: "10rem",
+          "2xl": "10rem",
+        }}
+        transform="rotate(180deg)"
+      >
+        <StyledIconBackground />
+      </Box>
+      <Box
+        backgroundImage={`url(${heroImage})`}
+        backgroundPosition="20% 20%"
+        backgroundRepeat="no-repeat"
+        width={{
+          md: "300px",
+          xl: "300px",
+          "2xl": "300px",
+        }}
+        height={{
+          md: "500px",
+          xl: "500px",
+          "2xl": "500px",
+        }}
+        borderTopLeftRadius="150px"
+        borderBottomRightRadius="150px"
+      />
+      <Box
+        backgroundImage={`url(${heroImage})`}
+        backgroundPosition="50% 40%"
+        backgroundRepeat="no-repeat"
+        width={{
+          md: "300px",
+          xl: "300px",
+          "2xl": "300px",
+        }}
+        height="300px"
+        borderTopLeftRadius="150px"
+        borderBottomRightRadius="150px"
+      />
+      <Box
+        backgroundImage={`url(${heroImage})`}
+        backgroundPosition="75% 85%"
+        backgroundRepeat="no-repeat"
+        width={{
+          xl: "300px",
+          "2xl": "300px",
+        }}
+        height="500px"
+        borderTopLeftRadius="150px"
+        borderBottomRightRadius="150px"
+        position="absolute"
+        right="20px"
+        bottom="-220px"
+      />
+    </Flex>
   );
 }

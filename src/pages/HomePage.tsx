@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
-import { Text, Container, Button, Flex, Image, Box } from "@chakra-ui/react";
+import {
+  Text,
+  Container,
+  Button,
+  Flex,
+  Image,
+  Box,
+  VStack,
+} from "@chakra-ui/react";
 import { Title, SimpleTitle } from "../components/home/Title";
 import HeroImage from "../components/home/HeroImage";
 import InfoGrid from "../components/home/InfoGrid";
@@ -56,13 +64,42 @@ export default function HomePage() {
   return (
     <main>
       {/* Hero Section */}
-      <HeroSection>
-        <div className="paragraph">
+      <Flex
+        width="100%"
+        minH="100vh"
+        direction={{
+          base: "column",
+          sm: "column",
+          md: "column",
+          lg: "column",
+          xl: "row",
+          "2xl": "row",
+        }}
+        justify="space-between"
+        align="center"
+        px={{
+          xl: "7em",
+          "2xl": "10em",
+        }}
+        mt={{
+          base: "150px",
+          sm: "150px",
+          md: "150px",
+          lg: "150px",
+          xl: "100px",
+          "2xl": "100px",
+        }}
+        position="relative"
+      >
+        <Flex direction="column">
           <Title mainTitlePrefix="Start Living" mainTitle="Move On" />
-          <div className="text">
+          <Text
+            maxW={{ md: "380px", xl: "400px", "2xl": "400px" }}
+            fontSize={{ md: "1.125rem", xl: "1.25rem", "2xl": "1.25rem" }}
+          >
             Find and Rent Out Room, Flat, Aprtments, Transportations & Parking
             Spaces
-          </div>
+          </Text>
           <Button
             width="180px"
             height="50px"
@@ -75,9 +112,9 @@ export default function HomePage() {
           >
             Book now
           </Button>
-        </div>
+        </Flex>
         <HeroImage />
-      </HeroSection>
+      </Flex>
 
       {/* Info Grid Section */}
       <InfoGridSection id="info">

@@ -6,6 +6,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { Path } from "./utils/Path";
 import theme from "./theme";
@@ -29,13 +30,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+const client = new QueryClient();
+
 const container = document.getElementById("app");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <RouterProvider router={router} />
-    </ChakraProvider>
+    <QueryClientProvider client={client}>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <RouterProvider router={router} />
+      </ChakraProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

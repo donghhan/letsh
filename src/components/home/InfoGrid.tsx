@@ -36,9 +36,24 @@ const items = [
 export default function InfoGrid() {
   return (
     <Grid
-      templateColumns="repeat(5, 1fr)"
+      templateColumns={{
+        sm: "1fr",
+        md: "repeat(2, 1fr)",
+        lg: "repeat(2, 400px)",
+        xl: "repeat(5, 1fr)",
+        "2xl": "repeat(5, 1fr)",
+      }}
       gap={6}
-      height="300px"
+      width={{
+        "2xl": "100%",
+      }}
+      height={{
+        xl: "300px",
+        "2xl": "100%",
+      }}
+      minHeight={{
+        "2xl": "300px",
+      }}
       marginTop="50px"
     >
       {items.map(({ id, src, caption }) => {
