@@ -37,13 +37,17 @@ export default function InfoGrid() {
   return (
     <Grid
       templateColumns={{
-        sm: "1fr",
+        base: "1fr",
+        sm: "repeat(2, 1fr)",
         md: "repeat(2, 1fr)",
-        lg: "repeat(2, 400px)",
-        xl: "repeat(5, 1fr)",
+        lg: "repeat(2, 300px)",
+        xl: "repeat(3, 250px)",
         "2xl": "repeat(5, 1fr)",
       }}
-      gap={6}
+      gap={{
+        base: "50px",
+        "2xl": "20px",
+      }}
       width={{
         "2xl": "100%",
       }}
@@ -64,6 +68,7 @@ export default function InfoGrid() {
                 src={src.default}
                 width="100%"
                 height="100%"
+                padding="0"
                 objectFit="cover"
                 borderTopLeftRadius="40%"
                 borderBottomRightRadius="40%"
@@ -72,7 +77,11 @@ export default function InfoGrid() {
                 _hover={{ transform: "scale(1.1)" }}
               />
             </Box>
-            <Text textAlign="center" marginTop="15px" fontWeight="bold">
+            <Text
+              textAlign="center"
+              marginTop={{ base: "10px", sm: "5px", "2xl": "15px" }}
+              fontWeight="bold"
+            >
               {caption}
             </Text>
           </GridItem>

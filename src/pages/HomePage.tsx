@@ -1,5 +1,14 @@
 import styled from "@emotion/styled";
-import { Text, Container, Button, Flex, Image, Box } from "@chakra-ui/react";
+import {
+  Text,
+  Container,
+  Button,
+  Flex,
+  Image,
+  Box,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { Title, SimpleTitle } from "../components/home/Title";
 import HeroImage from "../components/home/HeroImage";
 import InfoGrid from "../components/home/InfoGrid";
@@ -7,35 +16,12 @@ import * as freelancer from "../assets/images/freelancer.svg";
 import WhyChooseUsFlexItems from "../components/home/WhyChooseUs";
 import * as woman from "../assets/images/woman.svg";
 
-const CommonSection = styled.section`
-  width: 100%;
-  display: flex;
-  position: relative;
-  padding: 0 10em;
-
-  .text {
-    font-size: 1.125rem;
-    max-width: 600px;
-    letter-spacing: 1px;
-    line-height: 30px;
-    margin-top: 30px;
-  }
-`;
-
-const InfoGridSection = styled(CommonSection)`
-  flex-direction: column;
-  margin-bottom: 200px;
-`;
-
-const HowItWorksSection = styled(CommonSection)`
-  margin-bottom: 200px;
-`;
-
 export default function HomePage() {
   return (
     <main>
       {/* Hero Section */}
       <Flex
+        as="section"
         width="100%"
         minH="100vh"
         direction={{
@@ -89,45 +75,84 @@ export default function HomePage() {
       </Flex>
 
       {/* Info Grid Section */}
-      <InfoGridSection id="info">
-        <SimpleTitle mainTitle="New suites for you" />
-        <p className="text">
-          Introducting an entirely new way to share your own experience with
-          your favourite neightborhoods in Thailand
-        </p>
+      <Flex
+        width="100%"
+        as="section"
+        direction="column"
+        align={{
+          base: "center",
+          md: "center",
+        }}
+        p={{
+          base: "0 3em",
+        }}
+        mt={{
+          base: ".5em",
+          sm: "5em",
+          md: "150px",
+        }}
+      >
+        <Box>
+          <SimpleTitle mainTitle="New suites for you" />
+          <Text>
+            Introducting an entirely new way to share your own experience with
+            your favourite neightborhoods in Thailand
+          </Text>
+        </Box>
         <InfoGrid />
-      </InfoGridSection>
+      </Flex>
 
       {/* How Does It Works Section */}
-      <HowItWorksSection>
-        <Flex
-          width="100%"
-          py="100px"
-          bgColor="orange.400"
-          borderTopRightRadius="60px"
-          borderBottomLeftRadius="60px"
-          justifyContent="center"
-        >
-          <Container>
-            <Image src={freelancer.default} alt="freelancer" />
-          </Container>
-          <Container>
-            <Box>
-              <Text fontWeight="bold" fontSize="3.5rem" mb="20px" color="black">
-                How does it works
-              </Text>
-              <Text color="black" lineHeight="2rem" fontSize="1.115rem">
-                Rent is a free you pay in exchange for the use of someone's
-                property. Apartment rent gives you theright to occupy a
-                residential apartment and the terms of your occupancy are
-                dsecribed in the lease. Some of the things a lease covers are
-                the amount of rent, when it's due and fees or penalties for late
-                payment as well as any tenant restrictions.
-              </Text>
-            </Box>
-          </Container>
+      <Flex
+        as="section"
+        bgColor="orange.400"
+        p={{
+          base: "2em",
+        }}
+        m={{
+          base: "50px 0",
+        }}
+        borderTopRightRadius={{
+          base: "50px",
+          sm: "50px",
+        }}
+        borderBottomLeftRadius={{
+          base: "50px",
+          sm: "50px",
+        }}
+        justify="center"
+        display={{
+          base: "column",
+          sm: "column",
+        }}
+      >
+        <Container width={{ base: "70%" }}>
+          <Image src={freelancer.default} alt="freelancer" />
+        </Container>
+        <Flex as="div" direction="column" align="center">
+          <Text
+            fontWeight="bold"
+            fontSize={{ base: "2rem", "2xl": "3.5rem" }}
+            my="20px"
+            color="black"
+          >
+            How does it works
+          </Text>
+          <Text
+            color="black"
+            lineHeight="2rem"
+            fontSize={{ base: "1rem", "2xl": "1.115rem" }}
+            maxWidth={{ base: "300px", sm: "300px" }}
+          >
+            Rent is a free you pay in exchange for the use of someone's
+            property. Apartment rent gives you theright to occupy a residential
+            apartment and the terms of your occupancy are dsecribed in the
+            lease. Some of the things a lease covers are the amount of rent,
+            when it's due and fees or penalties for late payment as well as any
+            tenant restrictions.
+          </Text>
         </Flex>
-      </HowItWorksSection>
+      </Flex>
 
       {/* Why People Choose Us Section */}
       <Flex px="10em" w="100%" justify="space-around" my="5em">

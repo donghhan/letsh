@@ -77,7 +77,13 @@ export function Title({ mainTitlePrefix, mainTitle }: ITitle) {
 export function SimpleTitle({ mainTitle }: ITitle) {
   return (
     <Flex as="div" direction="column" position="relative">
-      <SimpleMainTitle>{mainTitle}</SimpleMainTitle>
+      <Text
+        fontFamily="inherit"
+        fontSize={{ base: "2.125rem", "2xl": "3rem" }}
+        fontWeight="bold"
+      >
+        {mainTitle}
+      </Text>
     </Flex>
   );
 }
