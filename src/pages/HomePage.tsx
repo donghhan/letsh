@@ -1,19 +1,10 @@
 import styled from "@emotion/styled";
-import {
-  Text,
-  Container,
-  Button,
-  Flex,
-  Image,
-  Box,
-  VStack,
-} from "@chakra-ui/react";
+import { Text, Container, Button, Flex, Image, Box } from "@chakra-ui/react";
 import { Title, SimpleTitle } from "../components/home/Title";
 import HeroImage from "../components/home/HeroImage";
 import InfoGrid from "../components/home/InfoGrid";
 import * as freelancer from "../assets/images/freelancer.svg";
 import WhyChooseUsFlexItems from "../components/home/WhyChooseUs";
-import { GiTreeBranch } from "react-icons/gi";
 import * as woman from "../assets/images/woman.svg";
 
 const CommonSection = styled.section`
@@ -31,17 +22,6 @@ const CommonSection = styled.section`
   }
 `;
 
-const HeroSection = styled(CommonSection)`
-  min-height: 100vh;
-  justify-content: space-between;
-  align-items: center;
-
-  .paragraph {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
 const InfoGridSection = styled(CommonSection)`
   flex-direction: column;
   margin-bottom: 200px;
@@ -49,15 +29,6 @@ const InfoGridSection = styled(CommonSection)`
 
 const HowItWorksSection = styled(CommonSection)`
   margin-bottom: 200px;
-`;
-
-const WhyPeopleChooseUsSection = styled(CommonSection)`
-  justify-content: space-around;
-
-  .image-section {
-    width: 400px;
-    height: 500px;
-  }
 `;
 
 export default function HomePage() {
@@ -78,6 +49,7 @@ export default function HomePage() {
         justify="space-between"
         align="center"
         px={{
+          base: "2em",
           xl: "7em",
           "2xl": "10em",
         }}
@@ -94,7 +66,7 @@ export default function HomePage() {
         <Flex direction="column">
           <Title mainTitlePrefix="Start Living" mainTitle="Move On" />
           <Text
-            maxW={{ md: "380px", xl: "400px", "2xl": "400px" }}
+            maxW={{ sm: "300px", md: "380px", xl: "400px", "2xl": "400px" }}
             fontSize={{ md: "1.125rem", xl: "1.25rem", "2xl": "1.25rem" }}
           >
             Find and Rent Out Room, Flat, Aprtments, Transportations & Parking
