@@ -14,15 +14,19 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.11.2
+  styled-breakpoints: ^12.0.4
   styled-components: 6.0.0-rc.3
   typescript: ^5.0.2
+  uninstall: ^0.0.0
   vite: ^4.3.9
 
 dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.11.2_biqbaboplfbrettd7655fr4n2y
+  styled-breakpoints: 12.0.4_qdp25fvddj5pqjbeci4zqv5g2a
   styled-components: 6.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+  uninstall: 0.0.0
 
 devDependencies:
   '@types/react': 18.2.8
@@ -3035,6 +3039,21 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /styled-breakpoints/12.0.4_qdp25fvddj5pqjbeci4zqv5g2a:
+    resolution: {integrity: sha512-mlYURG2VsV599AOdaqF2puWS0m2bHxuG+O8LjSQU/52HNVixyeFGhu2HzXrXD1xVKSKajluE0uhpf57uXw+0xg==}
+    peerDependencies:
+      react: ^18.x.x
+      styled-components: ^5.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      styled-components:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      styled-components: 6.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+    dev: false
+
   /styled-components/6.0.0-rc.3_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-5FbCTxynopck99GRwM5Ey0+VRp8pkQq69TwGOJJeYtR7gPvwGjNx8yBPLN7/dfxwwvn9ymOZYB19eQkv2k70wQ==}
     engines: {node: '>= 16'}
@@ -3161,6 +3180,10 @@ packages:
   /unicode-property-aliases-ecmascript/2.1.0:
     resolution: {integrity: sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==}
     engines: {node: '>=4'}
+    dev: false
+
+  /uninstall/0.0.0:
+    resolution: {integrity: sha512-pjP/0+A4gsbDVa8XH/S2GZdT9NPJW8NFMy3GI7HnsWG+NAmFSSj3QidNosXBI9cPtxxNExEDdhKFO6sli8K3mA==}
     dev: false
 
   /update-browserslist-db/1.0.11_browserslist@4.21.7:

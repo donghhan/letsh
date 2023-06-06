@@ -8,9 +8,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: ${(props) => props.theme.font.openSans};
+        font-family: ${({ theme }) => theme.fontFamily.openSans};
         font-size: 10px;
-        color: ${(props) => props.theme.color.black};
+        color: ${({ theme }) => theme.color.black};
     }
 
     ul, li {
@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
-        color: ${(props) => props.theme.color.black};
+        color: ${({ theme }) => theme.color.black};
     }
 
     span {
