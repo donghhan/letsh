@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalStyle } from "../styles/global";
+import Header from "./header/Header";
 
-const Padding = styled.div`
-  padding: 0 100px;
+export const Container = styled.div`
+  position: relative;
 
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    padding: 0 70px;
+  ${({ theme }) => theme.breakpoints.up("lg")} {
+    padding: 0 10em;
   }
 `;
 
@@ -14,9 +15,10 @@ export default function Root() {
   return (
     <>
       <GlobalStyle />
-      <Padding>
+      <Header />
+      <Container>
         <Outlet />
-      </Padding>
+      </Container>
     </>
   );
 }
