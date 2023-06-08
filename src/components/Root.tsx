@@ -9,6 +9,10 @@ export const Container = styled.div`
   ${({ theme }) => theme.breakpoints.up("lg")} {
     padding: 0 10em;
   }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    padding: 0 5em;
+  }
 `;
 
 export default function Root() {
