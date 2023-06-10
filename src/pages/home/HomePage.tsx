@@ -7,7 +7,6 @@ const HomeSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid green;
 `;
 
 const BackgroundWrapper = styled.div`

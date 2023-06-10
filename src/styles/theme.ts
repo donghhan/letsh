@@ -5,6 +5,7 @@ export const primaryTheme = {
     black: "#222325",
     gray: "#f9f5f1",
     white: "#fffcf9",
+    darkgray: "rgb(210, 210, 210)",
   },
   fontFamily: {
     openSans: "'Open Sans', sans-serif;",
