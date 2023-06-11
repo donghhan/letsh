@@ -2,8 +2,6 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalStyle } from "../styles/global";
 import Navbar from "./navbar/Navbar";
-import { useRecoilValue } from "recoil";
-import { languageState, currencyState } from "../atoms/atom";
 
 export const Container = styled.div`
   position: relative;
@@ -18,8 +16,6 @@ export const Container = styled.div`
 `;
 
 export default function Root() {
-  const language = useRecoilValue(languageState);
-
   return (
     <>
       <GlobalStyle />

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Menu from "./normal/index";
+import HamburgerMenu from "./hamburger/HamburgerMenu";
 
 export default function Navbar(): JSX.Element {
-  const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <HeaderSection>
-      <Menu open={hamburgerMenuOpen} />
+      <Menu open={open} />
+      <HamburgerMenu />
     </HeaderSection>
   );
 }

@@ -24,17 +24,6 @@ export const menuItems = [
   },
 ];
 
-export const languageMenuItmes = [
-  {
-    key: "en",
-    text: "en",
-  },
-  {
-    key: "th",
-    text: "th",
-  },
-];
-
 export const utilMenuItmes = {
   language: [
     {
