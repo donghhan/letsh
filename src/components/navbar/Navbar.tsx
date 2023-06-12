@@ -8,8 +8,8 @@ export default function Navbar(): JSX.Element {
 
   return (
     <HeaderSection>
-      <Menu open={open} />
-      <HamburgerMenu />
+      <Menu open={open} setOpen={setOpen} />
+      <HamburgerMenu open={open} setOpen={setOpen} />
     </HeaderSection>
   );
 }
@@ -22,6 +22,6 @@ const HeaderSection = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 10;
   background-color: ${({ theme }) => theme.color.white};
 `;

@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { menuItems } from "../data";
 import { currencyState } from "../../../atoms/atom";
+import { MenuOpenProps, SetMenuOpenProps } from "../interface";
 
-interface NormalMenuProps {
-  open: boolean;
-}
-
-export default function NormalMenu({ open }: NormalMenuProps): JSX.Element {
+export default function NormalMenu({
+  open,
+  setOpen,
+}: SetMenuOpenProps): JSX.Element {
   const { i18n } = useTranslation();
   const handleLanguageChange = () => {
     i18n.language === "en"
@@ -25,7 +25,7 @@ export default function NormalMenu({ open }: NormalMenuProps): JSX.Element {
 
   return (
     <NormalNavbarSection>
-      <Menu open={open}>
+      <Menu>
         {menuItems.map((i) => (
           <li key={i.key}>
             <Link to={i.to}>{i.text}</Link>
@@ -33,7 +33,7 @@ export default function NormalMenu({ open }: NormalMenuProps): JSX.Element {
         ))}
       </Menu>
       <Logo to="/">Let'sh</Logo>
-      <HamburgerMenuButton />
+      <HamburgerMenuButton onClick={() => setOpen(!open)} />
       <UtilMenu>
         <BsGlobe />
         <li>
@@ -75,7 +75,7 @@ const NormalNavbarSection = styled.nav`
   }
 `;
 
-const Menu = styled.ul<NormalMenuProps>`
+const Menu = styled.ul`
   display: flex;
   gap: 1.5em;
   letter-spacing: 0.1em;
@@ -99,6 +99,7 @@ const HamburgerMenuButton = styled(RxHamburgerMenu)`
   font-size: 2rem;
   margin-left: auto;
   position: absolute;
+  cursor: pointer;
 
   ${({ theme }) => theme.breakpoints.up("lg")} {
     display: none;
