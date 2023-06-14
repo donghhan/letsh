@@ -65,7 +65,7 @@ const HamburgerMenuSection = styled.aside<MenuOpenProps>`
   right: 0;
   top: 0;
   border-left: 1px solid ${({ theme }) => theme.color.darkgray};
-  transform: ${({ open }) => (open ? "translateX(100%)" : "translateX(0)")};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   transition: transform 0.2s ease-in-out;
 
   nav {

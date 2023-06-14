@@ -1,5 +1,15 @@
 import styled from "styled-components";
 import bgImage from "../../assets/background.jpg";
+import BookingBar from "../../components/home/BookingBar/BookingBar";
+
+export default function HomePage() {
+  return (
+    <HomeSection>
+      <BackgroundWrapper></BackgroundWrapper>
+      <BookingBar />
+    </HomeSection>
+  );
+}
 
 const HomeSection = styled.section`
   width: 100%;
@@ -7,6 +17,8 @@ const HomeSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
+  position: relative;
 `;
 
 const BackgroundWrapper = styled.div`
@@ -17,11 +29,3 @@ const BackgroundWrapper = styled.div`
   background-size: cover;
   background-position: 50% 50%;
 `;
-
-export default function HomePage() {
-  return (
-    <HomeSection>
-      <BackgroundWrapper></BackgroundWrapper>
-    </HomeSection>
-  );
-}
