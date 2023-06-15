@@ -1,24 +1,55 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
 import bgImage from "../../assets/background.jpg";
 import BookingBar from "../../components/home/BookingBar/BookingBar";
+import RoomCarousel from "../../components/home/RoomCarousel/RoomCarousel";
+import { ResponsivePadding } from "../../styles/common";
 
 export default function HomePage() {
   return (
-    <HomeSection>
-      <BackgroundWrapper></BackgroundWrapper>
-      <BookingBar />
-    </HomeSection>
+    <>
+      <HomeSection>
+        <BackgroundWrapper></BackgroundWrapper>
+        <BookingBar />
+      </HomeSection>
+      <LiveAnywhereSection>
+        <div className="title-wrapper">
+          <Title>Live Anywhere</Title>
+          <Subtext>
+            It's time to make your dreams an everyday reality. These
+            highly-crafted homes and properties promise modern and historic
+            architect-designed elegance in some of the world's most coveted
+            locations.
+          </Subtext>
+        </div>
+      </LiveAnywhereSection>
+    </>
   );
 }
 
-const HomeSection = styled.section`
+const SectionBaseStyle = css`
   width: 100%;
   min-height: 100vh;
+  position: relative;
+`;
+
+const HomeSection = styled.section`
+  ${SectionBaseStyle}
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  position: relative;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 `;
 
 const BackgroundWrapper = styled.div`
@@ -28,4 +59,41 @@ const BackgroundWrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
+`;
+
+const LiveAnywhereSection = styled(motion.section)`
+  ${SectionBaseStyle}
+  ${ResponsivePadding}
+  padding-top: 80px;
+  background-color: ${({ theme }) => theme.color.gray};
+  display: block;
+
+  .title-wrapper {
+    max-width: 650px;
+
+    ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+      max-width: 450px;
+      margin: 0 auto;
+    }
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 4rem;
+  margin-bottom: 0.3em;
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    font-size: 3rem;
+    text-align: center;
+  }
+`;
+
+const Subtext = styled.p`
+  font-size: 1rem;
+  line-height: 2;
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 `;
