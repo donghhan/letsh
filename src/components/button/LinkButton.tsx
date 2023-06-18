@@ -1,21 +1,22 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { BsArrowUpRight } from "react-icons/bs";
 
-interface ButtonProp {
+interface LinkButtonProp {
+  to: string;
   text: string;
-  style?: React.CSSProperties;
 }
 
-export default function Button({ text, style }: ButtonProp): JSX.Element {
+export default function LinkButton({ to, text }: LinkButtonProp): JSX.Element {
   return (
-    <StyledButton style={style}>
+    <StyledLink to={to}>
       {text}
       <BsArrowUpRight />
-    </StyledButton>
+    </StyledLink>
   );
 }
 
-const StyledButton = styled.button`
+const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 1rem;

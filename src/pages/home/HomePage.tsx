@@ -22,6 +22,7 @@ export default function HomePage() {
             locations.
           </Subtext>
         </div>
+        <RoomCarousel />
       </LiveAnywhereSection>
     </>
   );
