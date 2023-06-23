@@ -1,42 +1,60 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import carouselExample from "../../../assets/home_carousel.jpg";
+import { IRoomType } from "../../../api/interfaces/rooms.interface";
+import LinkButton from "../../button/LinkButton";
 
-export default function CarouselCard(): JSX.Element {
+interface CarouselCardButtonProp extends IRoomType {
+  to: string;
+}
+
+export default function CarouselCard({
+  name,
+  cover_image,
+  to,
+}: CarouselCardButtonProp): JSX.Element {
   return (
     <CardWrapper>
       <ImageWrapper>
-        <img src={carouselExample} alt="Example" />
+        <img src={cover_image} alt="Cover image for room_type" />
       </ImageWrapper>
       <TextWrapper>
-        <span>link</span>
+        <LinkButton to={to} text={name} />
+        <PropertyNumber>100 {name}s</PropertyNumber>
       </TextWrapper>
     </CardWrapper>
   );
 }
 
 const CardWrapper = styled.div`
-  max-width: 400px;
+  min-width: 380px;
   height: 100%;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   border: 1px solid green;
 `;
 
 const ImageWrapper = styled.div`
-  width: 100%;
+  height: 100%;
+  min-height: 400px;
 
   img {
-    width: 80%;
+    max-width: 300px;
   }
 `;
 
 const TextWrapper = styled.div`
-  align-self: flex-start;
-  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.5em;
 
-  span {
-    font-size: 1rem;
+  a {
+    font-size: 1.5rem;
   }
+`;
+
+const PropertyNumber = styled.span`
+  margin-top: 0.5em;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.color.darkgray};
+  font-family: ${({ theme }) => theme.fontFamily.robotoMono};
 `;

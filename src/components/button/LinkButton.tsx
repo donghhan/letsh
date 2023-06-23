@@ -22,6 +22,7 @@ const StyledLink = styled(Link)`
   font-size: 1rem;
 
   svg {
+    font-size: 1rem;
     margin-left: 0.3em;
     transition: transform 0.2s ease-in-out;
   }
