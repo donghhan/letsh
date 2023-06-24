@@ -25,7 +25,7 @@ export default function CarouselCard({
 }
 
 const CardWrapper = styled.div`
-  min-width: 380px;
+  min-width: 390px;
   height: 100%;
   min-height: 500px;
   display: flex;
@@ -39,6 +39,7 @@ const ImageWrapper = styled.div`
 
   img {
     max-width: 300px;
+    pointer-events: none;
   }
 `;
 
