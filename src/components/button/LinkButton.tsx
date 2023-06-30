@@ -5,18 +5,24 @@ import { BsArrowUpRight } from "react-icons/bs";
 interface LinkButtonProp {
   to: string;
   text: string;
+  animation?: boolean;
 }
 
-export default function LinkButton({ to, text }: LinkButtonProp): JSX.Element {
+// Used for letting outer link
+export default function LinkButton({
+  to,
+  text,
+  animation,
+}: LinkButtonProp): JSX.Element {
   return (
-    <StyledLink to={to}>
+    <StyledLink to={to} $animation={animation}>
       {text}
       <BsArrowUpRight />
     </StyledLink>
   );
 }
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<{ $animation?: boolean }>`
   display: flex;
   align-items: center;
   font-size: 1rem;

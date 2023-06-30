@@ -1,5 +1,5 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { instance } from "../axios";
+import { instance } from "./axios";
 
 export const getAllRooms = () =>
   instance.get("rooms/").then((response) => response.data);

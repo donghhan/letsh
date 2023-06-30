@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import bgImage from "../../assets/background.jpg";
 import BookingBar from "../../components/home/BookingBar/BookingBar";
 import RoomCarousel from "../../components/home/RoomCarousel/RoomCarousel";
+import TopPlaces from "../../components/home/TopPlaces/TopPlaces";
 import { ResponsivePadding } from "../../styles/common";
 
 export default function HomePage() {
@@ -24,6 +25,18 @@ export default function HomePage() {
         </div>
         <RoomCarousel />
       </LiveAnywhereSection>
+      <TopPlacesSection>
+        <div className="title-wrapper-horizontal">
+          <Title>Top Places</Title>
+          <Subtext>
+            Design-conscious hotels grounded in luxry, craft and sustainability.
+            These accomodations will elevate your experience of travel, whether
+            you're seeking a recharging retreat, a creative escape or an
+            adventure in nature.
+          </Subtext>
+        </div>
+        <TopPlaces />
+      </TopPlacesSection>
     </>
   );
 }
@@ -32,13 +45,6 @@ const SectionBaseStyle = css`
   width: 100%;
   min-height: 100vh;
   position: relative;
-`;
-
-const HomeSection = styled.section`
-  ${SectionBaseStyle}
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 80px;
   padding-bottom: 80px;
 
@@ -53,6 +59,13 @@ const HomeSection = styled.section`
   }
 `;
 
+const HomeSection = styled.section`
+  ${SectionBaseStyle}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const BackgroundWrapper = styled.div`
   width: 100%;
   min-height: 700px;
@@ -65,7 +78,6 @@ const BackgroundWrapper = styled.div`
 const LiveAnywhereSection = styled(motion.section)`
   ${SectionBaseStyle}
   ${ResponsivePadding}
-  padding-top: 80px;
   background-color: ${({ theme }) => theme.color.gray};
   display: block;
 
@@ -96,5 +108,18 @@ const Subtext = styled.p`
   ${({ theme }) => theme.breakpoints.between("xs", "md")} {
     font-size: 0.8rem;
     text-align: center;
+  }
+`;
+
+const TopPlacesSection = styled.section`
+  ${SectionBaseStyle}
+
+  .title-wrapper-horizontal {
+    display: flex;
+
+    p {
+      max-width: 700px;
+      margin: 0 auto;
+    }
   }
 `;

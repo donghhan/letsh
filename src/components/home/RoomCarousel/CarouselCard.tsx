@@ -7,8 +7,9 @@ interface CarouselCardButtonProp extends IRoomType {
 }
 
 export default function CarouselCard({
-  name,
+  room_type,
   cover_image,
+  total_rooms,
   to,
 }: CarouselCardButtonProp): JSX.Element {
   return (
@@ -17,8 +18,13 @@ export default function CarouselCard({
         <img src={cover_image} alt="Cover image for room_type" />
       </ImageWrapper>
       <TextWrapper>
-        <LinkButton to={to} text={name} />
-        <PropertyNumber>100 {name}s</PropertyNumber>
+        <LinkButton
+          to={to}
+          text={room_type.charAt(0).toUpperCase() + room_type.slice(1)}
+        />
+        <PropertyNumber>
+          {total_rooms?.toLocaleString("en-US")} {room_type}s
+        </PropertyNumber>
       </TextWrapper>
     </CardWrapper>
   );

@@ -1,4 +1,5 @@
 export interface IRoomType {
-  name: string;
+  room_type: string;
+  total_rooms?: number;
   cover_image?: string;
 }

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, MutableRefObject } from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { getAllRoomTypes } from "../../../api/rooms/roomApi";
+import { getAllRoomTypes } from "../../../api/roomApi";
 import { IRoomType } from "../../../api/interfaces/rooms.interface";
 import ImageNotFound from "../../../assets/image_not_found.png";
 import CarouselCard from "./CarouselCard";
@@ -22,17 +22,6 @@ export default function RoomCarousel(): JSX.Element {
     );
   }, []);
 
-  const bounceTransition = {
-    type: "spring",
-    stiffness: 500,
-    damping: 30,
-  };
-
-  const dragTransition = {
-    bounceStiffness: 500,
-    bounceDamping: 10,
-  };
-
   return (
     <SliderContainer>
       <motion.div
@@ -48,14 +37,10 @@ export default function RoomCarousel(): JSX.Element {
         >
           {data?.map((i) => (
             <CarouselCard
-              key={i.name}
-              name={i.name}
-              to={i.name.toLocaleLowerCase()}
-              cover_image={
-                i.cover_image
-                  ? `http://127.0.0.1:8000/${i.cover_image}`
-                  : ImageNotFound
-              }
+              key={i.room_type}
+              room_type={i.room_type}
+              total_rooms={i.total_rooms}
+              to={i.room_type}
             />
           ))}
         </motion.div>
