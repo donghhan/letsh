@@ -8,14 +8,14 @@ interface CarouselCardButtonProp extends IRoomType {
 
 export default function CarouselCard({
   room_type,
-  cover_image,
+  thumbnail,
   total_rooms,
   to,
 }: CarouselCardButtonProp): JSX.Element {
   return (
     <CardWrapper>
       <ImageWrapper>
-        <img src={cover_image} alt="Cover image for room_type" />
+        <img src={thumbnail} alt="Room Type Thumbnail" />
       </ImageWrapper>
       <TextWrapper>
         <LinkButton
@@ -36,15 +36,15 @@ const CardWrapper = styled.div`
   min-height: 500px;
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
 `;
 
 const ImageWrapper = styled.div`
+  min-width: 100%;
   height: 100%;
   min-height: 400px;
 
   img {
-    max-width: 300px;
+    width: 100%;
     pointer-events: none;
   }
 `;

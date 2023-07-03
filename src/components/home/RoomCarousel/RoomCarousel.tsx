@@ -40,6 +40,7 @@ export default function RoomCarousel(): JSX.Element {
               key={i.room_type}
               room_type={i.room_type}
               total_rooms={i.total_rooms}
+              thumbnail={i.thumbnail}
               to={i.room_type}
             />
           ))}

@@ -14,4 +14,23 @@ export async function GetAllAmenities() {
 }
 
 export const getAllRoomTypes = () =>
-  instance.get("rooms/room-types/").then((response) => response.data);
+  instance.get("rooms/room-types/").then((response) => {
+    const roomTypes = response.data;
+    const roomTypesWithImages = roomTypes.map((roomType: any) => {
+      const imageName = `${roomType.room_type}.jpg`;
+      const imageUrl = `src/assets/room_types/${imageName}`;
+      return {
+        ...roomType,
+        thumbnail: imageUrl,
+      };
+    });
+
+    return roomTypesWithImages;
+  });
+
+export const getRoomType = ({ queryKey }: QueryFunctionContext) => {
+  const [_, roomTypePk] = queryKey;
+  return instance
+    .get(`rooms/room-types/${roomTypePk}/`)
+    .then((response) => response.data);
+};
