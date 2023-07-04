@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IRoomType } from "../../../api/interfaces/rooms.interface";
+import notFound from "../../../assets/image_not_found.png";
 import LinkButton from "../../button/LinkButton";
 
 interface CarouselCardButtonProp extends IRoomType {
@@ -15,7 +16,11 @@ export default function CarouselCard({
   return (
     <CardWrapper>
       <ImageWrapper>
-        <img src={thumbnail} alt="Room Type Thumbnail" />
+        {thumbnail ? (
+          <img src={thumbnail} alt="Room Type Thumbnail" />
+        ) : (
+          <img src={notFound} alt="Not Found" />
+        )}
       </ImageWrapper>
       <TextWrapper>
         <LinkButton
@@ -32,10 +37,18 @@ export default function CarouselCard({
 
 const CardWrapper = styled.div`
   min-width: 390px;
-  height: 100%;
   min-height: 500px;
   display: flex;
   flex-direction: column;
+
+  ${({ theme }) => theme.breakpoints.only("md")} {
+    min-width: 400px;
+  }
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    min-width: 250px;
+    min-height: 200px;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -46,6 +59,10 @@ const ImageWrapper = styled.div`
   img {
     width: 100%;
     pointer-events: none;
+  }
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    min-height: 200px;
   }
 `;
 

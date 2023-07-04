@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, MutableRefObject } from "react";
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { getAllRoomTypes } from "../../../api/roomApi";
 import { IRoomType } from "../../../api/interfaces/rooms.interface";
@@ -8,19 +8,25 @@ import ImageNotFound from "../../../assets/image_not_found.png";
 import CarouselCard from "./CarouselCard";
 
 export default function RoomCarousel(): JSX.Element {
+  const queryClient = useQueryClient();
   const { isLoading, data } = useQuery<IRoomType[]>(
     ["roomsInfoForHomePage"],
-    getAllRoomTypes
+    getAllRoomTypes,
+    { staleTime: Infinity }
   );
 
   // Image Carousel left constraint
   const [width, setWidth] = useState<number>(0);
   const sliderWrapper = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => {
-    setWidth(
-      sliderWrapper.current.scrollWidth - sliderWrapper.current.offsetWidth
-    );
-  }, []);
+    queryClient.prefetchQuery(["roomsInfoForHomePage"], getAllRoomTypes);
+
+    if (data) {
+      setWidth(
+        sliderWrapper.current.scrollWidth - sliderWrapper.current.offsetWidth
+      );
+    }
+  }, [data, queryClient]);
 
   return (
     <SliderContainer>
