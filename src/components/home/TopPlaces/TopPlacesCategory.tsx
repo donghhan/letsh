@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCategories } from "../../../api/categoriesApi";
 import { RoomCategoriesInterface } from "../../../api/interfaces/categories.interface";
-import Button from "../../button/Button";
+import Button from "../../ui/button/Button";
 
 export default function TopPlacesCategory(): JSX.Element {
   // Fetching data

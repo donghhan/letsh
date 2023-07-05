@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-import InputButton from "../../button/InputButton";
-import { useForm, SubmitHandler } from "react-hook-form";
+import styled, { css } from "styled-components";
+import InputButton from "../../ui/button/InputButton";
+import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import Button from "../../ui/button/Button";
+import Popover from "../../ui/Popover";
 import Calendar from "../../calendar/StyledCalendar";
 
 interface BookingBarInputInterface {
@@ -18,34 +20,32 @@ export default function BookingBar(): JSX.Element {
     register,
     handleSubmit,
     watch,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<BookingBarInputInterface>();
   const onSubmit: SubmitHandler<BookingBarInputInterface> = (inputData) =>
     console.log(inputData);
+  const onError = (errors: FieldErrors<BookingBarInputInterface>) => {
+    console.log(errors);
+  };
 
   const [location, setLocation] = useState<string>();
-  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
   const [guest, setGuest] = useState<number>(2);
 
-  useEffect(() => {
-    const date = new Date();
-    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const month =
-      date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
-    const year =
-      i18n.language === "en"
-        ? date.getFullYear()
-        : `${date.getFullYear() + 600}`;
-  }, []);
-
   return (
-    <BookingBarForm onSubmit={handleSubmit(onSubmit)}>
-      <input
-        id="location"
-        type="text"
-        {...(register("location"), { required: true })}
-      />
+    <BookingBarForm onSubmit={handleSubmit(onSubmit, onError)}>
+      <div className="location-input">
+        <input
+          id="location"
+          type="text"
+          placeholder="Search your location"
+          {...register("location", { required: "Please choose location" })}
+        />
+        {errors.location && <Popover text={errors.location.message} />}
+      </div>
       <input
         id="check-in"
         type="date"
@@ -61,9 +61,48 @@ export default function BookingBar(): JSX.Element {
         defaultValue={2}
         {...register("guest", { required: true })}
       />
+      <Button
+        text="Search"
+        style={{
+          padding: ".5em 1em",
+          border: "1px solid darkgray",
+        }}
+        onClick={() => clearErrors()}
+      />
     </BookingBarForm>
   );
 }
+
+const GridStyle = css`
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5em;
+  grid-template-areas:
+    "location location"
+    "check-in check-out"
+    "guest guest"
+    "button button";
+
+  .location-input {
+    grid-area: location;
+  }
+
+  #check-in {
+    grid-area: check-in;
+  }
+
+  #check-out {
+    grid-area: check-out;
+  }
+
+  #guest {
+    grid-area: guest;
+  }
+
+  button {
+    grid-area: button;
+  }
+`;
 
 const BookingBarForm = styled.form`
   width: 100%;
@@ -79,32 +118,30 @@ const BookingBarForm = styled.form`
   padding: 1.5em;
 
   input {
+    background-color: ${({ theme }) => theme.color.white};
+    width: 100%;
+    height: 50px;
+    font-size: 1.125rem;
+
+    &::placeholder {
+      color: ${({ theme }) => theme.color.darkgray};
+      font-size: 1.125rem;
+    }
+  }
+
+  .location-input {
+    width: 100%;
+    position: relative;
   }
 
   ${({ theme }) => theme.breakpoints.only("md")} {
     max-width: 650px;
     bottom: 30px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 0.5em;
-    grid-template-areas:
-      "location location location"
-      "check-in check-out guest";
+    ${GridStyle}
+  }
 
-    #location {
-      grid-area: location;
-    }
-
-    #check-in {
-      grid-area: check-in;
-    }
-
-    #check-out {
-      grid-area: check-out;
-    }
-
-    #guest {
-      grid-area: guest;
-    }
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    width: 90%;
+    ${GridStyle}
   }
 `;

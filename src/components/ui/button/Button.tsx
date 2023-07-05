@@ -7,6 +7,7 @@ export interface ButtonProp {
   style?: React.CSSProperties;
   animation?: boolean;
   as?: React.ElementType;
+  onClick?: () => void;
 }
 
 export default function Button({
@@ -25,6 +26,8 @@ export default function Button({
 
 const StyledButton = styled.button<{ $animation?: boolean }>`
   display: flex;
+  height: 100%;
+  justify-content: center;
   align-items: center;
   font-size: 1rem;
   opacity: ${(props) => props.$animation && "0.5"};

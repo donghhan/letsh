@@ -25,6 +25,7 @@
     "uninstall": "^0.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@types/axios": "^0.14.0",
     "@types/react": "^18.0.37",
     "@types/react-calendar": "^4.1.0",
