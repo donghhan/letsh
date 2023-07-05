@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ButtonProp } from "./Button";
 import { BsArrowUpRight } from "react-icons/bs";
 
-interface LinkButtonProp {
+interface LinkButtonProp extends ButtonProp {
   to: string;
-  text: string;
-  animation?: boolean;
 }
 
 // Used for letting outer link

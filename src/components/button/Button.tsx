@@ -1,19 +1,22 @@
+import React from "react";
 import styled from "styled-components";
 import { BsArrowUpRight } from "react-icons/bs";
 
-interface ButtonProp {
+export interface ButtonProp {
   text: string;
   style?: React.CSSProperties;
   animation?: boolean;
+  as?: React.ElementType;
 }
 
 export default function Button({
   text,
+  as,
   style,
   animation,
 }: ButtonProp): JSX.Element {
   return (
-    <StyledButton style={style} $animation={animation}>
+    <StyledButton style={style} $animation={animation} as={as}>
       {text}
       <BsArrowUpRight />
     </StyledButton>
