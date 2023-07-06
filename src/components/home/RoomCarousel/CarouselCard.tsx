@@ -42,7 +42,8 @@ const CardWrapper = styled.div`
   flex-direction: column;
 
   ${({ theme }) => theme.breakpoints.only("md")} {
-    min-width: 400px;
+    min-width: 300px;
+    min-height: 300px;
   }
 
   ${({ theme }) => theme.breakpoints.between("xs", "md")} {
@@ -52,9 +53,9 @@ const CardWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  min-width: 100%;
+  width: 100%;
   height: 100%;
-  min-height: 400px;
+  /* min-height: 400px; */
 
   img {
     width: 100%;
@@ -73,6 +74,10 @@ const TextWrapper = styled.div`
 
   a {
     font-size: 1.5rem;
+  }
+
+  ${({ theme }) => theme.breakpoints.only("md")} {
+    margin-top: 1em;
   }
 `;
 
