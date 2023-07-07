@@ -5,7 +5,6 @@ import { RoomCategoriesInterface } from "../../../api/interfaces/categories.inte
 import Button from "../../ui/button/Button";
 
 export default function TopPlacesCategory(): JSX.Element {
-  // Fetching data
   const { isLoading, data } = useQuery<RoomCategoriesInterface[]>(
     ["roomCategories"],
     getAllCategories
@@ -19,7 +18,10 @@ export default function TopPlacesCategory(): JSX.Element {
         </li>
         {data?.map((i) => (
           <li key={i.name}>
-            <Button text={i.name} animation={true} />
+            <Button
+              text={i.name.charAt(0).toUpperCase() + i.name.slice(1)}
+              animation={true}
+            />
           </li>
         ))}
       </CategoryList>
@@ -30,7 +32,6 @@ export default function TopPlacesCategory(): JSX.Element {
 const CategoryContainer = styled.aside`
   min-width: 300px;
   height: fit-content;
-  border: 1px solid blue;
 `;
 
 const CategoryList = styled.ul`

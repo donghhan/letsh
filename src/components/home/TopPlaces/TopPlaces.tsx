@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
-import TopPlacesCard from "./TopPlacesCard";
+import SimpleRoomCard from "../../rooms/SimpleRoomCard";
 import TopPlacesCategory from "./TopPlacesCategory";
 import { RoomCategoriesInterface } from "../../../api/interfaces/categories.interface";
 

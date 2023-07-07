@@ -122,4 +122,22 @@ const TopPlacesSection = styled.section`
       margin: 0 auto;
     }
   }
+
+  ${({ theme }) => theme.breakpoints.only("md")} {
+    .title-wrapper-horizontal {
+      flex-direction: column;
+      max-width: 650px;
+    }
+  }
+
+  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
+    .title-wrapper-horizontal {
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        max-width: 450px;
+      }
+    }
+  }
 `;
