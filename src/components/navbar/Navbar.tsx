@@ -2,9 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import Menu from "./normal/index";
 import HamburgerMenu from "./hamburger/HamburgerMenu";
+import useUser from "../../hooks/useUser";
 
 export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
+  const { userLoading, user, isLoggedIn } = useUser();
 
   return (
     <HeaderSection>
@@ -22,6 +24,6 @@ const HeaderSection = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 3;
   background-color: ${({ theme }) => theme.color.white};
 `;

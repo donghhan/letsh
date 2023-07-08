@@ -47,12 +47,12 @@ export default function NormalMenu({
       </UtilMenu>
       <AuthMenu>
         <li>
-          <button>register</button>
+          <Link to="/register">register</Link>
         </li>
         <li>
-          <button className="sign-in">
+          <Link to="/login" className="log-in">
             sign in <BsChevronRight />
-          </button>
+          </Link>
         </li>
       </AuthMenu>
     </NormalNavbarSection>
@@ -143,7 +143,7 @@ const AuthMenu = styled.ul`
     display: flex;
     align-items: center;
 
-    button {
+    a {
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-family: ${({ theme }) => theme.fontFamily.robotoMono};
@@ -152,7 +152,7 @@ const AuthMenu = styled.ul`
       align-items: center;
     }
 
-    .sign-in {
+    .log-in {
       background-color: ${({ theme }) => theme.color.black};
       color: ${({ theme }) => theme.color.white};
       padding: 0.5em 1em;

@@ -5,6 +5,7 @@ import BlogPage from "./pages/blog/BlogPage";
 import BlogDetailPage from "./pages/blog/BlogDetailPage";
 import TopPlacesPage from "./pages/top-places/TopPlacesPage";
 import TopPlacesDetailPage from "./pages/top-places/TopPlacesDetailPage";
+import LoginPage from "./pages/auth/LoginPage";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
       },
       {
         path: "blog",

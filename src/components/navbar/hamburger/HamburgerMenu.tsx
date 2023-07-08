@@ -22,12 +22,8 @@ export default function HamburgerMenu({
       <nav>
         <MenuList>
           {menuItems.map((data) => (
-            <li>
-              <NavItem
-                data={data}
-                key={data.key}
-                offNav={() => setOpen(false)}
-              />
+            <li key={data.key}>
+              <NavItem data={data} offNav={() => setOpen(false)} />
             </li>
           ))}
         </MenuList>
