@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { menuItems } from "../data";
 import { currencyState } from "../../../atoms/atom";
+import AvatarMenu from "../AvatarMenu";
+import useUser from "../../../hooks/useUser";
 import { MenuOpenProps, SetMenuOpenProps } from "../interface";
 
 export default function NormalMenu({
@@ -19,6 +21,8 @@ export default function NormalMenu({
       ? i18n.changeLanguage("th")
       : i18n.changeLanguage("en");
   };
+
+  const { userLoading, user, isLoggedIn } = useUser();
 
   const setCurrentCurrency = useSetRecoilState(currencyState);
   const changeCurrency = () => {};
@@ -46,14 +50,22 @@ export default function NormalMenu({
         </li>
       </UtilMenu>
       <AuthMenu>
-        <li>
-          <Link to="/register">register</Link>
-        </li>
-        <li>
-          <Link to="/login" className="log-in">
-            sign in <BsChevronRight />
-          </Link>
-        </li>
+        {!userLoading ? (
+          !isLoggedIn ? (
+            <>
+              <li>
+                <Link to="/register">register</Link>
+              </li>
+              <li>
+                <Link to="/login" className="log-in">
+                  sign in <BsChevronRight />
+                </Link>
+              </li>
+            </>
+          ) : (
+            <AvatarMenu />
+          )
+        ) : null}
       </AuthMenu>
     </NormalNavbarSection>
   );
