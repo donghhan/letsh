@@ -1,18 +1,76 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoPersonCircle } from "react-icons/io5";
 
 interface AvatarMenuProp {
+  avatar?: string;
   onLogOut?: () => void;
 }
 
-export default function AvatarMenu({ onLogOut }: AvatarMenuProp): JSX.Element {
-  return <AvatarMenuWrapper></AvatarMenuWrapper>;
+export default function AvatarMenu({
+  avatar,
+  onLogOut,
+}: AvatarMenuProp): JSX.Element {
+  const [openDropDownMenu, setOpenDropDownMenu] = useState(false);
+
+  const handleDropDownMenu = () => {
+    setOpenDropDownMenu((openDropDownMenu) => !openDropDownMenu);
+  };
+
+  return (
+    <AvatarMenuWrapper onClick={handleDropDownMenu}>
+      <HamburgerMenu />
+      {avatar ? (
+        <AvartarProfile>
+          <img src={avatar} alt="User Profile Avatar" />
+        </AvartarProfile>
+      ) : (
+        <NonAvatarProfile />
+      )}
+      <DropDownMenu $openDropDownMenu={openDropDownMenu}></DropDownMenu>
+    </AvatarMenuWrapper>
+  );
 }
 
 const AvatarMenuWrapper = styled.div`
-  max-width: 150px;
-  max-height: 80px;
+  width: 100px;
+  height: 50px;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.color.gray};
+  padding: 0.5em;
+  border: 1px solid ${({ theme }) => theme.color.darkgray};
+  cursor: pointer;
+  position: relative;
+`;
+
+const HamburgerMenu = styled(RxHamburgerMenu)`
+  font-size: 1.125rem;
+`;
+
+const AvartarProfile = styled.div`
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+`;
+
+const NonAvatarProfile = styled(IoPersonCircle)`
+  font-size: 2rem;
+`;
+
+const DropDownMenu = styled.div<{ $openDropDownMenu: boolean }>`
+  width: 180px;
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  border: 1px solid red;
+  height: fit-content;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  visibility: ${(props) => (props.$openDropDownMenu ? "visible" : "hidden")};
 `;

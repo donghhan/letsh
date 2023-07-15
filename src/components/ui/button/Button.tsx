@@ -7,6 +7,8 @@ export interface ButtonProp {
   style?: React.CSSProperties;
   animation?: boolean;
   as?: React.ElementType;
+  isLoading?: boolean;
+  $inverted?: boolean;
   onClick?: () => void;
 }
 
@@ -15,22 +17,37 @@ export default function Button({
   as,
   style,
   animation,
+  $inverted,
 }: ButtonProp): JSX.Element {
   return (
-    <StyledButton style={style} $animation={animation} as={as}>
+    <StyledButton
+      style={style}
+      $animation={animation}
+      as={as}
+      $inverted={$inverted}
+    >
       {text}
       <BsArrowUpRight />
     </StyledButton>
   );
 }
 
-const StyledButton = styled.button<{ $animation?: boolean }>`
+const StyledButton = styled.button<{
+  $animation?: boolean;
+  $isLoading?: boolean;
+  $inverted?: boolean;
+}>`
   display: flex;
   height: 100%;
   justify-content: center;
+  background-color: ${({ $inverted, theme }) =>
+    $inverted ? theme.color.black : theme.color.white};
+  color: ${({ $inverted, theme }) =>
+    $inverted ? theme.color.white : theme.color.black};
   align-items: center;
   font-size: 1rem;
-  opacity: ${(props) => props.$animation && "0.5"};
+  opacity: ${({ $animation, $isLoading }) =>
+    $animation ? ".5" : $isLoading ? ".5" : "1"};
 
   svg {
     margin-left: 0.3em;

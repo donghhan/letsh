@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { toast, Bounce } from "react-toastify";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRecoilValue, useRecoilState } from "recoil";
 import useUser from "../../hooks/useUser";
+import { authState } from "../../atoms/atom";
+import { getMyProfile, login } from "../../api/userApi";
 import { BsChevronRight } from "react-icons/bs";
 import Button from "../../components/ui/button/Button";
 
-interface LoginFormInterface {
+interface ILoginForm {
   username: string;
   password: string;
 }
@@ -16,11 +21,44 @@ export default function LoginPage(): JSX.Element {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInterface>();
-  const { userLoading, user, isLoggedIn } = useUser();
+  } = useForm<ILoginForm>();
 
-  const onSubmit = (data: LoginFormInterface) => {
-    console.log(data);
+  // const location = useLocation();
+  // const from = ((location.state as any)?.from.pathname as string) || "/";
+
+  // const loginState = useRecoilValue(authState);
+
+  // const [changedLoginState, setChangedLoginState] = useRecoilState(authState);
+  // const query = useQuery(["myProfile"], getMyProfile, {
+  //   enabled: false,
+  //   select: (data) => data.data.user,
+  //   retry: 1,
+  //   onSuccess: (data) => {},
+  // });
+
+  const { userLoading, user, isLoggedIn } = useUser();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(login, {
+    onMutate: () => {
+      console.log("mutation starting");
+    },
+    onSuccess: (data) => {
+      toast.success("Successfully logged in!😝", {
+        position: "bottom-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        hideProgressBar: true,
+        transition: Bounce,
+      });
+      queryClient.refetchQueries(["myProfile"]);
+    },
+    onError: (error) => {
+      toast.error("Something went wrong...😰");
+    },
+  });
+
+  const onSubmit = ({ username, password }: ILoginForm) => {
+    mutation.mutate({ username, password });
   };
 
   return (
@@ -53,13 +91,13 @@ export default function LoginPage(): JSX.Element {
           </div>
           <Button
             text="Log In"
+            $inverted={true}
             style={{
-              backgroundColor: "black",
-              color: "white",
               width: "50%",
               height: "40px",
               marginTop: "1em",
             }}
+            isLoading={mutation.isLoading}
           />
           <ExtraMenuWrapper>
             <Link to="/">Forgot your account?</Link>

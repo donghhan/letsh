@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { BsGlobe, BsChevronRight } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { menuItems } from "../data";
-import { currencyState } from "../../../atoms/atom";
+import { currencyState, authState } from "../../../atoms/atom";
 import AvatarMenu from "../AvatarMenu";
 import useUser from "../../../hooks/useUser";
+import { logout } from "../../../api/userApi";
 import { MenuOpenProps, SetMenuOpenProps } from "../interface";
 
 export default function NormalMenu({
@@ -22,10 +25,30 @@ export default function NormalMenu({
       : i18n.changeLanguage("en");
   };
 
-  const { userLoading, user, isLoggedIn } = useUser();
+  const user = useRecoilValue(authState);
+  const { mutate: logoutUser, isLoading } = useMutation(
+    async () => await logout(),
+    {
+      onSuccess: (data) => {
+        window.location.href = "/login";
+      },
+      onError: (error: any) => {
+        if (Array.isArray(error.response.data.error)) {
+          error.data.error.forEach((i: any) =>
+            toast.error(i.message, { position: "bottom-right" })
+          );
+        } else {
+          toast.error(error.response.data.message, {
+            position: "bottom-right",
+          });
+        }
+      },
+    }
+  );
 
-  const setCurrentCurrency = useSetRecoilState(currencyState);
-  const changeCurrency = () => {};
+  const onLogoutHandler = async () => {
+    logout();
+  };
 
   return (
     <NormalNavbarSection>
@@ -38,35 +61,23 @@ export default function NormalMenu({
       </Menu>
       <Logo to="/">Let'sh</Logo>
       <HamburgerMenuButton onClick={() => setOpen(!open)} />
-      <UtilMenu>
-        <BsGlobe />
+      <UserMenu>
         <li>
           <button type="button" onClick={() => handleLanguageChange()}>
+            <BsGlobe />
             {i18n.language === "en" ? "th" : "en"}
           </button>
         </li>
         <li>
-          <button type="button"></button>
-        </li>
-      </UtilMenu>
-      <AuthMenu>
-        {!userLoading ? (
-          !isLoggedIn ? (
-            <>
-              <li>
-                <Link to="/register">register</Link>
-              </li>
-              <li>
-                <Link to="/login" className="log-in">
-                  sign in <BsChevronRight />
-                </Link>
-              </li>
-            </>
-          ) : (
+          {user ? (
             <AvatarMenu />
-          )
-        ) : null}
-      </AuthMenu>
+          ) : (
+            <Link to="/login" className="log-in">
+              sign in <BsChevronRight />
+            </Link>
+          )}
+        </li>
+      </UserMenu>
     </NormalNavbarSection>
   );
 }
@@ -82,8 +93,8 @@ const NormalNavbarSection = styled.nav`
   position: relative;
 
   ${({ theme }) => theme.breakpoints.up("lg")} {
-    padding: 0 5em;
     justify-content: space-between;
+    padding: 0 3em;
   }
 `;
 
@@ -126,24 +137,24 @@ const HamburgerMenuButton = styled(RxHamburgerMenu)`
   }
 `;
 
-const UtilMenu = styled.ul`
-  display: flex;
-  align-items: center;
+// const UtilMenu = styled.ul`
+//   display: flex;
+//   align-items: center;
 
-  ${({ theme }) => theme.breakpoints.down("lg")} {
-    display: none;
-  }
+//   ${({ theme }) => theme.breakpoints.down("lg")} {
+//     display: none;
+//   }
 
-  button {
-    margin-left: 0.5em;
-    letter-spacing: 0.1em;
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    font-family: ${({ theme }) => theme.fontFamily.robotoMono};
-  }
-`;
+//   button {
+//     margin-left: 0.5em;
+//     letter-spacing: 0.1em;
+//     font-size: 1.125rem;
+//     text-transform: uppercase;
+//     font-family: ${({ theme }) => theme.fontFamily.robotoMono};
+//   }
+// `;
 
-const AuthMenu = styled.ul`
+const UserMenu = styled.ul`
   display: flex;
   gap: 1em;
 
@@ -153,7 +164,18 @@ const AuthMenu = styled.ul`
 
   li {
     display: flex;
-    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+      font-family: ${({ theme }) => theme.fontFamily.robotoMono};
+      text-transform: uppercase;
+      font-size: 1rem;
+
+      svg {
+        margin-right: 0.5em;
+      }
+    }
 
     a {
       letter-spacing: 0.1em;

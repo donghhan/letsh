@@ -9,7 +9,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { router } from "./Router.tsx";
 import { theme } from "./styles/theme.ts";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 1000,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
