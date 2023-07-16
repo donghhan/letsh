@@ -11,7 +11,11 @@ export const getMyProfile = async () => {
 };
 
 export const logout = () =>
-  instance.post(`users/logout`).then((response) => response.data);
+  instance
+    .post(`users/logout`, null, {
+      headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
+    })
+    .then((response) => response.data);
 
 export const refreshAccessToken = async () => {
   const response = await instance.get<AuthGenericResponse>("tokens/refresh/");

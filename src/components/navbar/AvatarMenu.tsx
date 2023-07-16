@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoPersonCircle } from "react-icons/io5";
@@ -18,6 +20,16 @@ export default function AvatarMenu({
     setOpenDropDownMenu((openDropDownMenu) => !openDropDownMenu);
   };
 
+  const handleLogout = async () => {
+    toast("Successfully Logged Out!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      pauseOnHover: false,
+      hideProgressBar: true,
+      closeOnClick: true,
+    });
+  };
+
   return (
     <AvatarMenuWrapper onClick={handleDropDownMenu}>
       <HamburgerMenu />
@@ -28,7 +40,11 @@ export default function AvatarMenu({
       ) : (
         <NonAvatarProfile />
       )}
-      <DropDownMenu $openDropDownMenu={openDropDownMenu}></DropDownMenu>
+      <DropDownMenu $openDropDownMenu={openDropDownMenu}>
+        <li>
+          <button onClick={handleLogout}>Logout</button>
+        </li>
+      </DropDownMenu>
     </AvatarMenuWrapper>
   );
 }
@@ -68,8 +84,10 @@ const DropDownMenu = styled.div<{ $openDropDownMenu: boolean }>`
   width: 180px;
   position: absolute;
   right: 0;
-  bottom: -10px;
+  bottom: -50px;
   border: 1px solid red;
+  background-color: ${({ theme }) => theme.color.white};
+  padding: 0.5em;
   height: fit-content;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   visibility: ${(props) => (props.$openDropDownMenu ? "visible" : "hidden")};

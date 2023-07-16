@@ -47,9 +47,6 @@ dependencies:
   styled-components:
     specifier: 6.0.0-rc.3
     version: 6.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
-  uninstall:
-    specifier: ^0.0.0
-    version: 0.0.0
 
 devDependencies:
   '@testing-library/jest-dom':
@@ -3852,10 +3849,6 @@ packages:
   /unicode-property-aliases-ecmascript@2.1.0:
     resolution: {integrity: sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==}
     engines: {node: '>=4'}
-    dev: false
-
-  /uninstall@0.0.0:
-    resolution: {integrity: sha512-pjP/0+A4gsbDVa8XH/S2GZdT9NPJW8NFMy3GI7HnsWG+NAmFSSj3QidNosXBI9cPtxxNExEDdhKFO6sli8K3mA==}
     dev: false
 
   /update-browserslist-db@1.0.11(browserslist@4.21.7):

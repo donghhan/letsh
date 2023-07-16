@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { BsGlobe, BsChevronRight } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { menuItems } from "../data";
 import { currencyState, authState } from "../../../atoms/atom";
@@ -25,7 +26,7 @@ export default function NormalMenu({
       : i18n.changeLanguage("en");
   };
 
-  const user = useRecoilValue(authState);
+  const { userLoading, user, isLoggedIn } = useUser();
   const { mutate: logoutUser, isLoading } = useMutation(
     async () => await logout(),
     {
@@ -46,9 +47,18 @@ export default function NormalMenu({
     }
   );
 
-  const onLogoutHandler = async () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
+    queryClient.refetchQueries(["my-profile"]);
+    toast.success("Successfully Logged Out!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      closeOnClick: true,
+      hideProgressBar: true,
+      pauseOnHover: false,
+    });
   };
+  const queryClient = useQueryClient();
 
   return (
     <NormalNavbarSection>
@@ -69,13 +79,18 @@ export default function NormalMenu({
           </button>
         </li>
         <li>
-          {user ? (
-            <AvatarMenu />
-          ) : (
-            <Link to="/login" className="log-in">
-              sign in <BsChevronRight />
-            </Link>
-          )}
+          {!userLoading ? (
+            isLoggedIn ? (
+              <>
+                <button onClick={handleLogout}>Logout</button>
+                <ToastContainer />
+              </>
+            ) : (
+              <Link to="/login" className="log-in">
+                sign in <BsChevronRight />
+              </Link>
+            )
+          ) : null}
         </li>
       </UserMenu>
     </NormalNavbarSection>
