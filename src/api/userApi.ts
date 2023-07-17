@@ -17,34 +17,6 @@ export const logout = () =>
     })
     .then((response) => response.data);
 
-export const refreshAccessToken = async () => {
-  const response = await instance.get<AuthGenericResponse>("tokens/refresh/");
-  return response.data;
-};
-
-instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error: any) => {
-    const originalRequest = error.config;
-    const errorMessage = error.response.data.message as string;
-
-    if (
-      errorMessage.includes(
-        "No active account found with the given credentials"
-      ) &&
-      !originalRequest._retry
-    ) {
-      originalRequest._retry = true;
-      await refreshAccessToken();
-      return instance(originalRequest);
-    }
-
-    return Promise.reject(error);
-  }
-);
-
 export const signup = async (user: any) => {
   const response = await instance.post<AuthGenericResponse>(
     "users/signup",

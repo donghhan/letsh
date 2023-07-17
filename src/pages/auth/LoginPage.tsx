@@ -20,21 +20,9 @@ export default function LoginPage(): JSX.Element {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ILoginForm>();
-
-  // const location = useLocation();
-  // const from = ((location.state as any)?.from.pathname as string) || "/";
-
-  // const loginState = useRecoilValue(authState);
-
-  // const [changedLoginState, setChangedLoginState] = useRecoilState(authState);
-  // const query = useQuery(["myProfile"], getMyProfile, {
-  //   enabled: false,
-  //   select: (data) => data.data.user,
-  //   retry: 1,
-  //   onSuccess: (data) => {},
-  // });
 
   const { userLoading, user, isLoggedIn } = useUser();
   const queryClient = useQueryClient();
@@ -43,6 +31,7 @@ export default function LoginPage(): JSX.Element {
       console.log("mutation starting");
     },
     onSuccess: (data) => {
+      queryClient.refetchQueries(["my-profile"]);
       toast.success("Successfully logged in!😝", {
         position: "bottom-right",
         autoClose: 2000,
@@ -50,14 +39,15 @@ export default function LoginPage(): JSX.Element {
         hideProgressBar: true,
         transition: Bounce,
       });
-      queryClient.refetchQueries(["myProfile"]);
+      // queryClient.refetchQueries(["myProfile"]);
+      reset();
     },
     onError: (error) => {
       toast.error("Something went wrong...😰");
     },
   });
 
-  const onSubmit = ({ username, password }: ILoginForm) => {
+  const handleLogin = ({ username, password }: ILoginForm) => {
     mutation.mutate({ username, password });
   };
 
@@ -65,7 +55,7 @@ export default function LoginPage(): JSX.Element {
     <LoginPageSection>
       <div className="login-form-wrapper">
         <h1 className="title">Login</h1>
-        <LoginForm onSubmit={handleSubmit(onSubmit)}>
+        <LoginForm onSubmit={handleSubmit(handleLogin)}>
           <div className="input-box">
             <label htmlFor="username">Username</label>
             <input

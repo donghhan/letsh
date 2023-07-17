@@ -27,38 +27,33 @@ export default function NormalMenu({
   };
 
   const { userLoading, user, isLoggedIn } = useUser();
-  const { mutate: logoutUser, isLoading } = useMutation(
-    async () => await logout(),
-    {
-      onSuccess: (data) => {
-        window.location.href = "/login";
-      },
-      onError: (error: any) => {
-        if (Array.isArray(error.response.data.error)) {
-          error.data.error.forEach((i: any) =>
-            toast.error(i.message, { position: "bottom-right" })
-          );
-        } else {
-          toast.error(error.response.data.message, {
-            position: "bottom-right",
-          });
-        }
-      },
-    }
-  );
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(logout, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["my-profile"]);
+      toast.success("Successfully Logged Out!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        hideProgressBar: true,
+        pauseOnHover: false,
+      });
+    },
+    onError: () => {
+      toast.error("Something went wrong...", {
+        position: "bottom-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        hideProgressBar: true,
+        pauseOnHover: false,
+      });
+    },
+  });
 
   const handleLogout = async () => {
-    await logout();
-    queryClient.refetchQueries(["my-profile"]);
-    toast.success("Successfully Logged Out!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      closeOnClick: true,
-      hideProgressBar: true,
-      pauseOnHover: false,
-    });
+    mutation.mutate();
   };
-  const queryClient = useQueryClient();
 
   return (
     <NormalNavbarSection>
