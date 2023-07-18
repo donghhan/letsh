@@ -33,3 +33,12 @@ export const login = async ({ username, password }: IUserLoginInput) => {
   );
   return response.data;
 };
+
+export const lineLogin = async (code: string) => {
+  const response = await instance.post(
+    "users/line",
+    { code },
+    { headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" } }
+  );
+  return response.status;
+};

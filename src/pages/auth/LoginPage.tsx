@@ -9,6 +9,7 @@ import useUser from "../../hooks/useUser";
 import { authState } from "../../atoms/atom";
 import { getMyProfile, login } from "../../api/userApi";
 import { BsChevronRight } from "react-icons/bs";
+import { lineBaseBtn, lineHoverBtn, linePressBtn } from "./lineButton";
 import Button from "../../components/ui/button/Button";
 
 interface ILoginForm {
@@ -79,16 +80,21 @@ export default function LoginPage(): JSX.Element {
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}
           </div>
-          <Button
-            text="Log In"
-            $inverted={true}
-            style={{
-              width: "50%",
-              height: "40px",
-              marginTop: "1em",
-            }}
-            isLoading={mutation.isLoading}
-          />
+          <>
+            <Button
+              text="Log In"
+              $inverted={true}
+              style={{
+                width: "200px",
+                height: "40px",
+                marginTop: "1em",
+              }}
+              isLoading={mutation.isLoading}
+            />
+            <LineSocialButton to={import.meta.env.VITE_LINE_SOCIAL_OAUTH_URL}>
+              <img src={lineBaseBtn} alt="buton" />
+            </LineSocialButton>
+          </>
           <ExtraMenuWrapper>
             <Link to="/">Forgot your account?</Link>
             <Link to="/register">Not have account yet?</Link>
@@ -170,4 +176,18 @@ const ErrorMessage = styled.span`
   color: ${({ theme }) => theme.color.red};
   font-size: 0.8rem;
   margin-top: 1em;
+`;
+
+const LineSocialButton = styled(Link)`
+  width: 200px;
+  background: url("../../assets/line/btn_login_base.png") no-repeat;
+
+  img {
+    width: 100%;
+    height: 45px;
+  }
+
+  &:hover {
+    background: url() no-repeat;
+  }
 `;

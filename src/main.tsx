@@ -12,14 +12,12 @@ import { theme } from "./styles/theme.ts";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={true} />
-      <RecoilRoot>
-        <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={true} />
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </RecoilRoot>
+  </QueryClientProvider>
 );

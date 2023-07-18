@@ -6,6 +6,7 @@ import BlogDetailPage from "./pages/blog/BlogDetailPage";
 import TopPlacesPage from "./pages/top-places/TopPlacesPage";
 import TopPlacesDetailPage from "./pages/top-places/TopPlacesDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
+import LineConfirm from "./pages/auth/LineConfirm";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,15 @@ export const router = createBrowserRouter([
           {
             path: ":topPlacesId",
             element: <TopPlacesDetailPage />,
+          },
+        ],
+      },
+      {
+        path: "social",
+        children: [
+          {
+            path: "line",
+            element: <LineConfirm />,
           },
         ],
       },
