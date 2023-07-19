@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
@@ -52,6 +52,9 @@ export default function LoginPage(): JSX.Element {
     mutation.mutate({ username, password });
   };
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <LoginPageSection>
       <div className="login-form-wrapper">
@@ -90,6 +93,11 @@ export default function LoginPage(): JSX.Element {
                 marginTop: "1em",
               }}
               isLoading={mutation.isLoading}
+              onClick={() => {
+                if (location.state?.from) {
+                  navigate(location.state.from);
+                }
+              }}
             />
             <LineSocialButton to={import.meta.env.VITE_LINE_SOCIAL_OAUTH_URL}>
               <img src={lineBaseBtn} alt="buton" />

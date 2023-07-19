@@ -1,5 +1,7 @@
-export interface IRoomType {
-  room_type: string;
-  total_rooms?: number;
-  thumbnail?: string | null;
+export interface ISimpleRoom {
+  name: string;
+  thumbnail?: string;
+  review?: number;
+  price_per_night: number;
+  address: string;
 }

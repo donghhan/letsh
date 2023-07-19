@@ -7,6 +7,8 @@ import TopPlacesPage from "./pages/top-places/TopPlacesPage";
 import TopPlacesDetailPage from "./pages/top-places/TopPlacesDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 import LineConfirm from "./pages/auth/LineConfirm";
+import UploadRoomPage from "./pages/room/UploadRoomPage";
+import RoomListPage from "./pages/room/RoomListPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ export const router = createBrowserRouter([
             element: <BlogDetailPage />,
           },
         ],
+      },
+      {
+        path: "rooms/upload",
+        element: <UploadRoomPage />,
       },
       {
         path: "top-places",

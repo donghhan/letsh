@@ -76,10 +76,16 @@ export default function NormalMenu({
         <li>
           {!userLoading ? (
             isLoggedIn ? (
-              <>
+              <div className="user-menu-item">
+                {user.is_owner ? (
+                  <Link className="upload-room" to="/rooms/upload">
+                    Upload Room
+                  </Link>
+                ) : null}
+                <Link to="/">My Profile</Link>
                 <button onClick={handleLogout}>Logout</button>
                 <ToastContainer />
-              </>
+              </div>
             ) : (
               <Link to="/login" className="log-in">
                 sign in <BsChevronRight />
@@ -194,6 +200,17 @@ const UserMenu = styled.ul`
       font-size: 1rem;
       display: flex;
       align-items: center;
+    }
+
+    .user-menu-item {
+      display: flex;
+      gap: 1em;
+
+      .upload-room {
+        background-color: ${({ theme }) => theme.color.black};
+        color: ${({ theme }) => theme.color.white};
+        padding: 0.5em 1em;
+      }
     }
 
     .log-in {

@@ -4,6 +4,8 @@ import { instance } from "./axios";
 export const getAllRooms = () =>
   instance.get("rooms/").then((response) => response.data);
 
+export const getTopPlacesRoom = async () => {};
+
 export async function GetRoomDetail({ queryKey }: QueryFunctionContext) {
   const [_, roomPk] = queryKey;
   return await instance.get(`rooms/${roomPk}`);
