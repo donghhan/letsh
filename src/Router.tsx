@@ -8,6 +8,7 @@ import TopPlacesDetailPage from "./pages/top-places/TopPlacesDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 import LineConfirm from "./pages/auth/LineConfirm";
 import UploadRoomPage from "./pages/room/UploadRoomPage";
+import SignupPage from "./pages/auth/SignupPage";
 import RoomListPage from "./pages/room/RoomListPage";
 
 export const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginPage />,
+      },
+      {
+        path: "signup",
+        element: <SignupPage />,
       },
       {
         path: "blog",

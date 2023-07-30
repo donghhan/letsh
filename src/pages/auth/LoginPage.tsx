@@ -105,7 +105,7 @@ export default function LoginPage(): JSX.Element {
           </>
           <ExtraMenuWrapper>
             <Link to="/">Forgot your account?</Link>
-            <Link to="/register">Not have account yet?</Link>
+            <Link to="/signup">Not have account yet?</Link>
           </ExtraMenuWrapper>
         </LoginForm>
       </div>

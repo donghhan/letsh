@@ -3,7 +3,8 @@ import { createStyledBreakpointsTheme } from "styled-breakpoints";
 export const primaryTheme = {
   color: {
     black: "#222325",
-    gray: "#f9f5f1",
+    lightgray: "#f9f5f1",
+    gray: "#C5C5C5",
     white: "#fffcf9",
     darkgray: "#878787",
     red: "#E53E3E",
