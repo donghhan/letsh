@@ -78,7 +78,7 @@ const BackgroundWrapper = styled.div`
 const LiveAnywhereSection = styled(motion.section)`
   ${SectionBaseStyle}
   ${ResponsivePadding}
-  background-color: ${({ theme }) => theme.color.gray};
+  background-color: ${({ theme }) => theme.color.beige};
   display: block;
 
   .title-wrapper {

@@ -1,10 +1,5 @@
+import { FC, forwardRef } from "react";
 import styled from "styled-components";
-import { useForm, useFormContext } from "react-hook-form";
-
-interface ILabelProp {
-  htmlFor?: string;
-  labelText?: string;
-}
 
 type InputType = "text" | "password" | "email" | "file";
 
@@ -12,40 +7,32 @@ interface IInputProp {
   placeholder: string;
   id: string;
   type: InputType;
-  validationSchema?: object;
+  error?: boolean;
 }
 
-interface IFormProp extends ILabelProp, IInputProp {}
-
-export default function FormInput({
-  placeholder,
-  id,
-  type,
-  validationSchema,
-}: IFormProp) {
-  const methods = useFormContext();
-
-  return (
-    <InputWrapper>
+const FormInput: FC<IInputProp> = forwardRef<HTMLInputElement, IInputProp>(
+  ({ placeholder, id, type = "text", error, ...props }, ref) => {
+    return (
       <StyledInput
-        required
         placeholder={placeholder}
         id={id}
         type={type}
-        {...methods.register(id)}
+        {...props}
+        ref={ref}
+        $error={error}
       />
-    </InputWrapper>
-  );
-}
+    );
+  }
+);
 
-const InputWrapper = styled.div`
-  margin-bottom: 0.5em;
-`;
+export default FormInput;
 
-const StyledInput = styled.input<{ required: boolean }>`
-  border: 1px solid ${({ theme }) => theme.color.gray};
+const StyledInput = styled.input<{ $error?: boolean }>`
+  border: 1px solid
+    ${({ $error, theme }) => ($error ? theme.color.red : theme.color.gray)};
   padding-left: 1em;
   width: 100%;
   min-height: 50px;
   font-size: 1rem;
+  margin-bottom: 0.5em;
 `;

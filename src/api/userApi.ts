@@ -42,3 +42,8 @@ export const lineLogin = async (code: string) => {
   );
   return response.status;
 };
+
+export const checkUser = async () => {
+  const response = await instance.get("users/check-user");
+  return response.data;
+};

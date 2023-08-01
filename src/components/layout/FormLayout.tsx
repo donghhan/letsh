@@ -23,6 +23,7 @@ const FormSection = styled.section`
 const FormWrapper = styled.div`
   height: 100vh;
   display: flex;
+  padding-top: 80px;
   align-items: center;
   justify-content: center;
 

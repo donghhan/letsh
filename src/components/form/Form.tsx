@@ -31,7 +31,7 @@ const StyledForm = styled.form`
   }
 
   ${({ theme }) => theme.breakpoints.up("lg")} {
-    min-width: 400px;
+    width: 450px;
   }
 `;
 
