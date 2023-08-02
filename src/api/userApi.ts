@@ -19,8 +19,9 @@ export const logout = () =>
 
 export const signup = async (user: any) => {
   const response = await instance.post<AuthGenericResponse>(
-    "users/signup",
-    user
+    "users/signup/",
+    user,
+    { headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" } }
   );
   return response.data;
 };

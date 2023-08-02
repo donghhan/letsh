@@ -1,12 +1,14 @@
-import styled from "styled-components";
-import { useForm, Controller } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { toast, Bounce } from "react-toastify";
+import useProtect from "../../hooks/useProtect";
+import { signup } from "../../api/userApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./validationSchema";
 import FormLayout from "../../components/layout/FormLayout";
 import Form from "../../components/form/Form";
 import FormInput from "../../components/form/FormInput";
-import { checkUser } from "../../api/userApi";
 import FormOption from "../../components/form/FormOption";
 import Button from "../../components/ui/button/Button";
 import ErrorMessage from "../../components/form/ErrorMessage";
@@ -28,15 +30,40 @@ export default function SignupPage() {
     register,
     reset,
     trigger,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<ISignup>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver<ISignup>(validationSchema),
   });
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation(signup, {
+    onMutate: () => {
+      console.log("Signup mutation is starting");
+    },
+    onSuccess: (data) => {
+      queryClient.refetchQueries(["my-profile"]);
+      toast.success("Successfully signed up!😝", {
+        position: "bottom-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        hideProgressBar: true,
+        transition: Bounce,
+      });
+      reset();
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("Something went wrong...😰");
+    },
+  });
+
+  useProtect();
+  const navigate = useNavigate();
+
   const handleSingnup = (data: ISignup) => {
-    console.log(data);
+    mutation.mutate(data);
+    navigate(-2);
   };
 
   return (

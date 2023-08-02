@@ -1,15 +1,11 @@
-import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRecoilValue, useRecoilState } from "recoil";
-import useUser from "../../hooks/useUser";
-import { authState } from "../../atoms/atom";
-import { getMyProfile, login } from "../../api/userApi";
-import { BsChevronRight } from "react-icons/bs";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { login } from "../../api/userApi";
 import { lineBaseBtn, lineHoverBtn, linePressBtn } from "./lineButton";
+import useProtect from "../../hooks/useProtect";
 import Button from "../../components/ui/button/Button";
 
 interface ILoginForm {
@@ -25,7 +21,6 @@ export default function LoginPage(): JSX.Element {
     formState: { errors },
   } = useForm<ILoginForm>();
 
-  const { userLoading, user, isLoggedIn } = useUser();
   const queryClient = useQueryClient();
   const mutation = useMutation(login, {
     onMutate: () => {
@@ -40,7 +35,6 @@ export default function LoginPage(): JSX.Element {
         hideProgressBar: true,
         transition: Bounce,
       });
-      // queryClient.refetchQueries(["myProfile"]);
       reset();
     },
     onError: (error) => {
@@ -51,6 +45,8 @@ export default function LoginPage(): JSX.Element {
   const handleLogin = ({ username, password }: ILoginForm) => {
     mutation.mutate({ username, password });
   };
+
+  useProtect();
 
   const location = useLocation();
   const navigate = useNavigate();

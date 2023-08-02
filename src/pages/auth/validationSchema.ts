@@ -56,7 +56,6 @@ export const validationSchema = yup.object().shape({
   lastName: yup
     .string()
     .notRequired()
-    .nullable()
     .matches(
       /[^0-9!-\/:-@[-`{-~\s]/,
       "Last name can only contain Thai or English alphabets"
@@ -79,4 +78,5 @@ export const validationSchema = yup.object().shape({
     .notRequired()
     .max(16, "Phone number is too long")
     .matches(/[0-9]/, "Please provide valid phone number"),
+  profilePicture: yup.string().notRequired(),
 });

@@ -7,7 +7,7 @@ export default function useProtect() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!userLoading) {
-      if (!isLoggedIn) {
+      if (isLoggedIn) {
         navigate("/");
       }
     }
