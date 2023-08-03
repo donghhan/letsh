@@ -1,11 +1,17 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { toast, Bounce } from "react-toastify";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { checkUsernameExists } from "./validation/loginValidationSchema";
 import { login } from "../../api/userApi";
-import { lineBaseBtn, lineHoverBtn, linePressBtn } from "./lineButton";
+import { loginValidationSchema } from "./validation/loginValidationSchema";
 import useProtect from "../../hooks/useProtect";
+import FormLayout from "../../components/layout/FormLayout";
+import Form from "../../components/form/Form";
+import FormInput from "../../components/form/FormInput";
+import ErrorMessage from "../../components/form/ErrorMessage";
+import LoginThumbnail from "../../assets/auth/login_thumbnail.jpg";
 import Button from "../../components/ui/button/Button";
 
 interface ILoginForm {
@@ -14,12 +20,7 @@ interface ILoginForm {
 }
 
 export default function LoginPage(): JSX.Element {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ILoginForm>();
+  useProtect();
 
   const queryClient = useQueryClient();
   const mutation = useMutation(login, {
@@ -42,156 +43,59 @@ export default function LoginPage(): JSX.Element {
     },
   });
 
-  const handleLogin = ({ username, password }: ILoginForm) => {
-    mutation.mutate({ username, password });
-  };
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    reset,
+    watch,
+    setError,
+    formState: { errors },
+  } = useForm<ILoginForm>({
+    resolver: yupResolver(loginValidationSchema),
+    mode: "onChange",
+  });
 
-  useProtect();
-
-  const location = useLocation();
   const navigate = useNavigate();
 
-  return (
-    <LoginPageSection>
-      <div className="login-form-wrapper">
-        <h1 className="title">Login</h1>
-        <LoginForm onSubmit={handleSubmit(handleLogin)}>
-          <div className="input-box">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              {...register("username", { required: "Username is required." })}
-            />
-            {errors.username && (
-              <ErrorMessage>{errors.username.message}</ErrorMessage>
-            )}
-          </div>
+  const handleLogin = ({ username, password }: ILoginForm) => {
+    mutation.mutate({ username, password });
+    navigate(-1);
+  };
 
-          <div className="input-box">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              {...register("password", { required: "Password is required." })}
-            />
-            {errors.password && (
-              <ErrorMessage>{errors.password.message}</ErrorMessage>
-            )}
-          </div>
-          <>
-            <Button
-              text="Log In"
-              $inverted={true}
-              style={{
-                width: "200px",
-                height: "40px",
-                marginTop: "1em",
-              }}
-              isLoading={mutation.isLoading}
-              onClick={() => {
-                if (location.state?.from) {
-                  navigate(location.state.from);
-                }
-              }}
-            />
-            <LineSocialButton to={import.meta.env.VITE_LINE_SOCIAL_OAUTH_URL}>
-              <img src={lineBaseBtn} alt="buton" />
-            </LineSocialButton>
-          </>
-          <ExtraMenuWrapper>
-            <Link to="/">Forgot your account?</Link>
-            <Link to="/signup">Not have account yet?</Link>
-          </ExtraMenuWrapper>
-        </LoginForm>
-      </div>
-    </LoginPageSection>
+  return (
+    <FormLayout bgimage={LoginThumbnail}>
+      <Form onSubmit={handleSubmit(handleLogin)} formTitle="Login">
+        <FormInput
+          placeholder="username"
+          id="username"
+          type="text"
+          error={errors.username ? true : false}
+          onChange
+          {...register("username", { validate: checkUsernameExists || "NO" })}
+        />
+        {errors.username && (
+          <ErrorMessage>{errors.username.message}</ErrorMessage>
+        )}
+        <FormInput
+          placeholder="password"
+          id="password"
+          type="password"
+          error={errors.password ? true : false}
+          {...register("password")}
+        />
+        {errors.password && (
+          <ErrorMessage>{errors.password.message}</ErrorMessage>
+        )}
+        <Button
+          text="Log in"
+          $inverted={true}
+          style={{ width: "100%", minHeight: "50px" }}
+          onClick={() => {
+            trigger(["username", "password"]);
+          }}
+        />
+      </Form>
+    </FormLayout>
   );
 }
-
-const LoginPageSection = styled.section`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 80px;
-
-  .login-form-wrapper {
-    width: 600px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .title {
-      font-size: 3rem;
-      margin-bottom: 0.6em;
-    }
-  }
-`;
-
-const LoginForm = styled.form`
-  width: 100%;
-  padding: 0.5em 5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
-
-  .input-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    label {
-      display: inline-block;
-      align-self: flex-start;
-      margin-bottom: 0.5em;
-      font-size: 1rem;
-    }
-
-    input {
-      padding-left: 1em;
-      font-size: 1rem;
-      width: 100%;
-      min-height: 50px;
-      border: 1px solid ${({ theme }) => theme.color.darkgray};
-      border-radius: 6px;
-    }
-  }
-`;
-
-const ExtraMenuWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1em;
-
-  a {
-    font-size: 0.8rem;
-  }
-`;
-
-const ErrorMessage = styled.span`
-  color: ${({ theme }) => theme.color.red};
-  font-size: 0.8rem;
-  margin-top: 1em;
-`;
-
-const LineSocialButton = styled(Link)`
-  width: 200px;
-  background: url("../../assets/line/btn_login_base.png") no-repeat;
-
-  img {
-    width: 100%;
-    height: 45px;
-  }
-
-  &:hover {
-    background: url() no-repeat;
-  }
-`;

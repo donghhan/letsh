@@ -5,7 +5,7 @@ import { toast, Bounce } from "react-toastify";
 import useProtect from "../../hooks/useProtect";
 import { signup } from "../../api/userApi";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { validationSchema } from "./validationSchema";
+import { signupValidationSchema } from "./validation/signupValidationSchema";
 import FormLayout from "../../components/layout/FormLayout";
 import Form from "../../components/form/Form";
 import FormInput from "../../components/form/FormInput";
@@ -33,7 +33,7 @@ export default function SignupPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<ISignup>({
-    resolver: yupResolver<ISignup>(validationSchema),
+    resolver: yupResolver<ISignup>(signupValidationSchema),
   });
 
   const queryClient = useQueryClient();
@@ -42,7 +42,7 @@ export default function SignupPage() {
       console.log("Signup mutation is starting");
     },
     onSuccess: (data) => {
-      queryClient.refetchQueries(["my-profile"]);
+      // queryClient.refetchQueries(["my-profile"]);
       toast.success("Successfully signed up!😝", {
         position: "bottom-right",
         autoClose: 2000,

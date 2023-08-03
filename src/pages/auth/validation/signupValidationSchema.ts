@@ -1,7 +1,7 @@
 import * as yup from "yup";
-import { instance } from "../../api/axios";
+import { instance } from "../../../api/axios";
 
-async function checkUsernameAvailablity(username: string) {
+async function checkUsernameAvailability(username: string) {
   try {
     const response = await instance.get("users/check-username", {
       params: { username },
@@ -25,7 +25,7 @@ async function checkEmailAvailability(email: string) {
   }
 }
 
-export const validationSchema = yup.object().shape({
+export const signupValidationSchema = yup.object().shape({
   username: yup
     .string()
     .required("Username is required")
@@ -35,7 +35,7 @@ export const validationSchema = yup.object().shape({
       "Username already exists",
       async (value: string) => {
         if (!value) return true;
-        return await checkUsernameAvailablity(value);
+        return await checkUsernameAvailability(value);
       }
     ),
   email: yup
@@ -56,6 +56,8 @@ export const validationSchema = yup.object().shape({
   lastName: yup
     .string()
     .notRequired()
+    .optional()
+    .nullable()
     .matches(
       /[^0-9!-\/:-@[-`{-~\s]/,
       "Last name can only contain Thai or English alphabets"
@@ -76,7 +78,9 @@ export const validationSchema = yup.object().shape({
   phoneNumber: yup
     .string()
     .notRequired()
+    .optional()
+    .nullable()
     .max(16, "Phone number is too long")
     .matches(/[0-9]/, "Please provide valid phone number"),
-  profilePicture: yup.string().notRequired(),
+  profilePicture: yup.string().notRequired().optional().nullable(),
 });

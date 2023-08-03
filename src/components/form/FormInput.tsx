@@ -8,10 +8,11 @@ interface IInputProp {
   id: string;
   type: InputType;
   error?: boolean;
+  onChange?: () => void;
 }
 
 const FormInput: FC<IInputProp> = forwardRef<HTMLInputElement, IInputProp>(
-  ({ placeholder, id, type = "text", error, ...props }, ref) => {
+  ({ placeholder, id, type = "text", error, onChange, ...props }, ref) => {
     return (
       <StyledInput
         placeholder={placeholder}
@@ -20,6 +21,7 @@ const FormInput: FC<IInputProp> = forwardRef<HTMLInputElement, IInputProp>(
         {...props}
         ref={ref}
         $error={error}
+        onChange={onChange}
       />
     );
   }
