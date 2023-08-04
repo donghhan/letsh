@@ -14,7 +14,7 @@ import ErrorMessage from "../../components/form/ErrorMessage";
 import LoginThumbnail from "../../assets/auth/login_thumbnail.jpg";
 import Button from "../../components/ui/button/Button";
 
-interface ILoginForm {
+export interface ILoginForm {
   username: string;
   password: string;
 }

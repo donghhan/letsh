@@ -5,8 +5,8 @@ import TopPlacesCategory from "./TopPlacesCategory";
 import { ISimpleRoom } from "../../../api/interfaces/rooms.interface";
 
 export default function TopPlaces(): JSX.Element {
-  const { isLoading, data } = useQuery<ISimpleRoom>(["topPlaces"]);
-  console.log(data);
+  // const { isLoading, data } = useQuery<ISimpleRoom>(["topPlaces"]);
+  // console.log(data);
   return (
     <TopPlacesContainer>
       <TopPlacesCategory />

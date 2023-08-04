@@ -11,9 +11,10 @@ export async function GetRoomDetail({ queryKey }: QueryFunctionContext) {
   return await instance.get(`rooms/${roomPk}`);
 }
 
-export async function GetAllAmenities() {
-  return await instance.get(`rooms/amenities`);
-}
+export const getAllAmenities = async () => {
+  const response = await instance.get(`rooms/amenities`);
+  return response.data;
+};
 
 export const getAllRoomTypes = async () => {
   const response = await instance.get("rooms/room-types/");

@@ -9,6 +9,7 @@ export interface ButtonProp {
   as?: React.ElementType;
   isLoading?: boolean;
   $inverted?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

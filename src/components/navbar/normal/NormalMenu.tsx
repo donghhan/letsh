@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BsGlobe, BsChevronRight } from "react-icons/bs";
@@ -7,13 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import { menuItems } from "../data";
-import { currencyState, authState } from "../../../atoms/atom";
-import AvatarMenu from "../AvatarMenu";
 import useUser from "../../../hooks/useUser";
 import { logout } from "../../../api/userApi";
-import { MenuOpenProps, SetMenuOpenProps } from "../interface";
+import { SetMenuOpenProps } from "../interface";
 
 export default function NormalMenu({
   open,
@@ -78,7 +74,7 @@ export default function NormalMenu({
             isLoggedIn ? (
               <div className="user-menu-item">
                 {user.is_owner ? (
-                  <Link className="upload-room" to="/rooms/upload">
+                  <Link className="upload-room" to="/rooms/upload/">
                     Upload Room
                   </Link>
                 ) : null}

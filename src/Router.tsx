@@ -9,6 +9,9 @@ import LoginPage from "./pages/auth/LoginPage";
 import LineConfirm from "./pages/auth/LineConfirm";
 import UploadRoomPage from "./pages/room/UploadRoomPage";
 import SignupPage from "./pages/auth/SignupPage";
+import UploadRoomCategoryPage from "./pages/room/UploadRoomCategoryPage";
+import UploadRoomTypePage from "./pages/room/UploadRoomTypePage";
+import UploadRoomAddressPage from "./pages/room/UploadRoomAddressPage";
 import RoomListPage from "./pages/room/RoomListPage";
 
 export const router = createBrowserRouter([
@@ -39,8 +42,13 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "rooms/upload",
-        element: <UploadRoomPage />,
+        path: "rooms",
+        children: [
+          {
+            path: "upload",
+            element: <UploadRoomPage />,
+          },
+        ],
       },
       {
         path: "top-places",

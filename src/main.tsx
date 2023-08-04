@@ -1,5 +1,4 @@
 import "./i18n.ts";
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import { RouterProvider } from "react-router-dom";
