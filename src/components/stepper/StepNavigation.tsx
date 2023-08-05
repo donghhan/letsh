@@ -1,20 +1,35 @@
-import { useContext, useState } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import styled from "styled-components";
-import { ActiveStepContext } from "../../context/ActiveStepContext";
 import Step from "./Step";
 
 interface IStepNavigation {
-  labels: string[];
+  steps: string[];
+  activeStep: number;
+  setActiveStep: React.Dispatch<SetStateAction<number>>;
 }
 
 export default function StepNavigation({
-  labels,
+  steps,
+  activeStep,
+  setActiveStep,
 }: IStepNavigation): JSX.Element {
   return (
-    <div>
-      {labels.map((item, index) => (
-        <Step labels={item}></Step>
+    <StepWrapper>
+      {steps.map((item, index) => (
+        <Step
+          key={index}
+          label={item}
+          index={index}
+          $selected={activeStep === index + 1}
+          setActiveStep={setActiveStep}
+        />
       ))}
-    </div>
+    </StepWrapper>
   );
 }
+
+const StepWrapper = styled.div`
+  display: flex;
+  margin-bottom: 5em;
+  gap: 5em;
+`;

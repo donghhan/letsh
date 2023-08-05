@@ -6,12 +6,4 @@ export const SectionLayout = css`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${({ theme }) => theme.breakpoints.between("xs", "md")} {
-    flex-direction: column;
-  }
-
-  ${({ theme }) => theme.breakpoints.up("md")} {
-    flex-direction: row;
-  }
 `;

@@ -19,6 +19,7 @@ export default function Button({
   style,
   animation,
   $inverted,
+  onClick,
 }: ButtonProp): JSX.Element {
   return (
     <StyledButton
@@ -26,6 +27,7 @@ export default function Button({
       $animation={animation}
       as={as}
       $inverted={$inverted}
+      onClick={onClick}
     >
       {text}
       <BsArrowUpRight />

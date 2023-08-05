@@ -9,6 +9,7 @@ export const primaryTheme = {
     darkgray: "#878787",
     red: "#E53E3E",
     green: "#38A169",
+    darkgreen: "#8E9779",
   },
   fontFamily: {
     openSans: "'Open Sans', sans-serif;",

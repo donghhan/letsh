@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 interface IFormOption {
-  value?: string;
+  titleText: string;
+  children: React.ReactNode;
 }
 
-export default function FormOption({ value }: IFormOption) {
+export default function FormOption({ titleText, children }: IFormOption) {
   return (
     <OptionWrapper>
-      <StyledSelect></StyledSelect>
+      <StyledTitle>{titleText}</StyledTitle>
     </OptionWrapper>
   );
 }
@@ -16,6 +17,6 @@ const OptionWrapper = styled.div`
   position: relative;
 `;
 
-const StyledSelect = styled.select`
-  display: none;
+const StyledTitle = styled.span`
+  font-size: 1.25rem;
 `;

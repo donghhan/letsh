@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
-import SimpleRoomCard from "../../rooms/SimpleRoomCard";
 import TopPlacesCategory from "./TopPlacesCategory";
-import { ISimpleRoom } from "../../../api/interfaces/rooms.interface";
 
 export default function TopPlaces(): JSX.Element {
-  // const { isLoading, data } = useQuery<ISimpleRoom>(["topPlaces"]);
-  // console.log(data);
   return (
     <TopPlacesContainer>
       <TopPlacesCategory />

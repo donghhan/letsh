@@ -11,3 +11,12 @@ export const ResponsivePadding = css`
     padding-right: 0.5em;
   }
 `;
+
+export const FormSectionStyle = css`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
