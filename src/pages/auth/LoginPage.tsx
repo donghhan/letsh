@@ -71,7 +71,6 @@ export default function LoginPage(): JSX.Element {
           id="username"
           type="text"
           error={errors.username ? true : false}
-          onChange
           {...register("username", { validate: checkUsernameExists || "NO" })}
         />
         {errors.username && (

@@ -1,7 +1,7 @@
 import { FC, forwardRef } from "react";
 import styled from "styled-components";
 
-type InputType = "text" | "password" | "email" | "file";
+type InputType = "text" | "password" | "email" | "file" | "checkbox" | "number";
 
 interface IInputProp {
   placeholder: string;

@@ -1,14 +1,10 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { useFormContext, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import { FormSectionStyle } from "../../styles/common";
 import { getAllCategories } from "../../api/categoriesApi";
 import { getAllRoomTypes } from "../../api/roomApi";
-import { ActiveStepContext } from "../../context/ActiveStepContext";
-import StepperForm from "../../components/form/StepperForm";
-import FormOption from "../../components/form/FormOption";
-import OptionInput from "../../components/form/OptionInput";
+import Form from "../../components/form/Form";
+import FormOptionInput from "../../components/form/FormOptionInput";
 
 interface IRoomTypesAndCategories extends ICategories, IRoomTypes {}
 
@@ -32,34 +28,43 @@ export default function UploadRoomCategoryPage() {
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <FormSection>
-      <form>
-        <p>Choose your room category</p>
-        {allCategories?.map((i) => (
-          <li key={i.pk}>
-            <input type="radio" id={i.name} name="categories" value={i.name} />
-            <label htmlFor={i.name}>{i.name}</label>
-          </li>
-        ))}
-      </form>
-      <form>
-        <p>Choose your room type</p>
-        {allRoomTypes?.map((i) => (
-          <li key={i.id}>
-            <input
-              type="radio"
+    <FormContainer>
+      <FormWrapper>
+        <Form
+          formTitle="Choose your room category"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {allCategories?.map((i, index) => (
+            <FormOptionInput
+              key={i.name}
+              name="categories"
+              id={i.name}
+              value={i.name}
+            />
+          ))}
+        </Form>
+      </FormWrapper>
+      <FormWrapper>
+        <Form
+          formTitle="Choose your room type"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {allRoomTypes?.map((i) => (
+            <FormOptionInput
+              key={i.room_type}
+              name="room_types"
               id={i.room_type}
               value={i.room_type}
-              name="room_type"
             />
-            <label htmlFor={i.room_type}>{i.room_type}</label>
-          </li>
-        ))}
-      </form>
-    </FormSection>
+          ))}
+        </Form>
+      </FormWrapper>
+    </FormContainer>
   );
 }
 
-const FormSection = styled.div`
-  ${FormSectionStyle}
+const FormContainer = styled.div``;
+
+const FormWrapper = styled.div`
+  border: 1px solid red;
 `;

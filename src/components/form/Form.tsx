@@ -5,15 +5,16 @@ interface IForm {
   children: React.ReactNode;
   onSubmit: () => void;
   formTitle: string;
+  style?: React.CSSProperties;
 }
 
-export default function Form({ children, onSubmit, formTitle }: IForm) {
+export default function Form({ children, onSubmit, formTitle, style }: IForm) {
   const methods = useForm();
   const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} style={style}>
         <FormTitle>{formTitle}</FormTitle>
         {children}
       </StyledForm>

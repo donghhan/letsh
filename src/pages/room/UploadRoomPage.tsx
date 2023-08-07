@@ -1,98 +1,70 @@
-import { useState, useContext } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { SectionLayout } from "../../components/layout/lib/style";
 import useHostOnly from "../../hooks/useHostOnly";
-import StepNavigation from "../../components/stepper/StepNavigation";
-import UploadRoomCategoryPage from "./UploadRoomCategoryPage";
-import UploadRoomBasicPage from "./UploadRoomBasicPage";
-import UploadRoomAddressPage from "./UploadRoomAddressPage";
-import UploadRoomTypePage from "./UploadRoomTypePage";
-import UploadRoomFinishPage from "./UploadRoomFinishPage";
-import UploadRoomAmenitiesPage from "./UploadRoomAmenitiesPage";
-import UploadRoomPhotosPage from "./UploadRoomPhotosPage";
-import Button from "../../components/ui/button/Button";
-import { ActiveStepContext } from "../../context/ActiveStepContext";
+import Form from "../../components/form/Form";
+import FormInput from "../../components/form/FormInput";
+
+interface IUploadRoom {
+  name: string;
+  price_per_night: number;
+  room_type: string;
+  guest: number;
+  bedroom: number;
+  bathroom: number;
+  wifi: boolean;
+  description: string;
+}
 
 export default function UploadRoomPage() {
   useHostOnly();
 
-  const steps = ["Categories", "Basic Info", "Amenities", "Photos", "Finished"];
-  const [activeStep, setActiveStep] = useState<number>(0);
-
-  const updateActiveStep = (activeStep: number) => {
-    setActiveStep(activeStep);
-  };
-
-  const getStepContent = (stepIndex: number) => {
-    switch (stepIndex) {
-      case 0:
-        return <UploadRoomCategoryPage />;
-      case 1:
-        return <UploadRoomBasicPage />;
-      case 2:
-        return <UploadRoomAmenitiesPage />;
-      case 3:
-        return <UploadRoomPhotosPage />;
-      default:
-        return null;
-    }
-  };
-
-  const navigate = useNavigate();
+  const { handleSubmit } = useForm<IUploadRoom>();
+  const onSubmit = (data: any) => console.log(data);
 
   return (
-    <ActiveStepContext.Provider value={activeStep}>
-      <UploadRoomSection>
-        <StepNavigation
-          steps={steps}
-          activeStep={activeStep}
-          setActiveStep={setActiveStep}
-        ></StepNavigation>
-        <Container>
-          {activeStep === steps.length ? (
-            <UploadRoomFinishPage />
-          ) : (
-            <>{getStepContent(activeStep)}</>
-          )}
-        </Container>
-        <ButtonContainer>
-          <Button
-            text={activeStep === 0 ? "Go back" : "Previous"}
-            $inverted={true}
-            style={{ padding: "0.5em 1.5em" }}
-            onClick={() => {
-              if (activeStep === 0) {
-                navigate(-1);
-              }
-              setActiveStep(activeStep - 1);
-            }}
-          />
-          <Button
-            text={activeStep === steps.length ? "Finish" : "Next"}
-            $inverted={true}
-            style={{ padding: "0.5em 1.5em" }}
-            onClick={() => {
-              if (activeStep === steps.length) {
-                navigate(-1);
-              }
-              setActiveStep(activeStep + 1);
-            }}
-          />
-        </ButtonContainer>
-      </UploadRoomSection>
-    </ActiveStepContext.Provider>
+    <UploadRoomSection>
+      <Form
+        formTitle="Fill out your information"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormInput placeholder="Room name" type="text" id="name" />
+        <FormInput placeholder="Price per night" type="text" id="price" />
+        <FormInput placeholder="Guest (in number)" type="number" id="guest" />
+        <FormInput
+          placeholder="Bedroom (in number)"
+          type="number"
+          id="bedroom"
+        />
+        <FormInput
+          placeholder="Bathroom (in number)"
+          type="number"
+          id="bathroom"
+        />
+        <div>
+          <label htmlFor="wifi">Wifi</label>
+          <input type="checkbox" />
+        </div>
+        <FormInput placeholder="Description" type="text" id="description" />
+      </Form>
+    </UploadRoomSection>
   );
 }
 
 const UploadRoomSection = styled.section`
-  ${SectionLayout}
+  width: 100%;
+  height: fit-content;
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Container = styled.div`
   width: 100%;
-  min-height: 40vh;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
 `;
 
 const ButtonContainer = styled.div`

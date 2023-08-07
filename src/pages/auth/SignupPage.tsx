@@ -9,7 +9,6 @@ import { signupValidationSchema } from "./validation/signupValidationSchema";
 import FormLayout from "../../components/layout/FormLayout";
 import Form from "../../components/form/Form";
 import FormInput from "../../components/form/FormInput";
-import FormOption from "../../components/form/FormOption";
 import Button from "../../components/ui/button/Button";
 import ErrorMessage from "../../components/form/ErrorMessage";
 import SignupThumbnail from "../../assets/auth/signup_thumbnail.jpg";
