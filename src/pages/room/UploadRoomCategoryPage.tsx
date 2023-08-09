@@ -6,22 +6,19 @@ import { getAllRoomTypes } from "../../api/roomApi";
 import Form from "../../components/form/Form";
 import FormOptionInput from "../../components/form/FormOptionInput";
 
-interface IRoomTypesAndCategories extends ICategories, IRoomTypes {}
+interface IRoomTypesAndCategories extends ICategories {}
 
 export default function UploadRoomCategoryPage() {
   const { data: allCategories, isLoading: categoriesLoading } = useQuery<
     ICategories[]
   >(["allCategories"], getAllCategories);
 
-  const { data: allRoomTypes, isLoading: roomTypesLoading } = useQuery<
-    IRoomTypes[]
-  >(["allRoomTypes"], getAllRoomTypes);
-
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<IRoomTypesAndCategories>();
+  } = useForm<ICategories>();
 
   const onSubmit = (data: any) => console.log(data);
 
@@ -36,12 +33,13 @@ export default function UploadRoomCategoryPage() {
             {allCategories?.map((i) => (
               <FormOptionInput
                 key={i.pk}
-                name="categories"
-                buttonText={i.name.charAt(0).toUpperCase() + i.name.slice(1)}
+                text={i.name.charAt(0).toUpperCase() + i.name.slice(1)}
                 icon={i.icon}
+                onClick={() => setValue("name", i.name)}
               />
             ))}
           </FormOptionContainer>
+          <button>go</button>
         </Form>
       </FormWrapper>
     </FormContainer>
@@ -63,6 +61,6 @@ const FormWrapper = styled.div`
 
 const FormOptionContainer = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(200px, auto));
   gap: 3em;
 `;

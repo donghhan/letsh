@@ -2,51 +2,45 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 interface IFormOptionInput {
-  name: string;
-  buttonText: string;
+  text: string;
   icon?: string;
+  onClick: () => void;
 }
 
 export default function FormOptionInput({
-  name,
   icon,
-  buttonText,
+  text,
+  onClick,
 }: IFormOptionInput): JSX.Element {
   const location = useLocation();
 
   return (
     <FormOptionList>
-      <RadioButtonWrapper>
-        {icon ? (
-          <img src={`${location.hash}/${icon}`} alt="Category Icon" />
-        ) : null}
-        <RadioButton type="button">{buttonText}</RadioButton>
-      </RadioButtonWrapper>
+      <button onClick={onClick}>
+        <img src={`${location.hash}/${icon}`} alt="Category Icon" />
+        {text}
+      </button>
     </FormOptionList>
   );
 }
 
 const FormOptionList = styled.li`
-  display: flex;
-  cursor: pointer;
-`;
-
-const RadioButtonWrapper = styled.select`
-  min-width: 170px;
-  min-height: 100px;
-  border: 0.1rem solid ${({ theme }) => theme.color.gray};
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   img {
     max-width: 30px;
-    max-height: 30px;
+    margin-right: 0.5em;
   }
-`;
 
-const RadioButton = styled.input`
-  font-size: 1.125rem;
-  margin-left: 0.5em;
+  button {
+    min-width: 150px;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.15rem solid ${({ theme }) => theme.color.gray};
+    border-radius: 6px;
+
+    &:focus {
+      border: 0.3rem solid ${({ theme }) => theme.color.black};
+    }
+  }
 `;
