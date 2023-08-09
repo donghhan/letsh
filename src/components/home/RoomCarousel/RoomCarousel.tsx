@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { getAllRoomTypes } from "../../../api/roomApi";
-import { IRoomType } from "../../../api/interfaces/rooms.interface";
+import { ICarouselRoomProp } from "../../../api/interfaces/rooms.interface";
 import ImageNotFound from "../../../assets/image_not_found.png";
 import CarouselCard from "./CarouselCard";
 
 export default function RoomCarousel(): JSX.Element {
   const queryClient = useQueryClient();
-  const { isLoading, data } = useQuery<IRoomType[]>(
+  const { isLoading, data } = useQuery<ICarouselRoomProp[]>(
     ["roomsInfoForHomePage"],
     getAllRoomTypes,
     { staleTime: Infinity }

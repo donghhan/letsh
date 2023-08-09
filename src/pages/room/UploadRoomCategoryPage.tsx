@@ -17,8 +17,6 @@ export default function UploadRoomCategoryPage() {
     IRoomTypes[]
   >(["allRoomTypes"], getAllRoomTypes);
 
-  console.log(allCategories, typeof allCategories);
-
   const {
     register,
     handleSubmit,
@@ -34,37 +32,37 @@ export default function UploadRoomCategoryPage() {
           formTitle="Choose your room category"
           onSubmit={handleSubmit(onSubmit)}
         >
-          {allCategories?.map((i, index) => (
-            <FormOptionInput
-              key={i.name}
-              name="categories"
-              id={i.name}
-              value={i.name}
-            />
-          ))}
-        </Form>
-      </FormWrapper>
-      <FormWrapper>
-        <Form
-          formTitle="Choose your room type"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {allRoomTypes?.map((i) => (
-            <FormOptionInput
-              key={i.room_type}
-              name="room_types"
-              id={i.room_type}
-              value={i.room_type}
-            />
-          ))}
+          <FormOptionContainer>
+            {allCategories?.map((i) => (
+              <FormOptionInput
+                key={i.pk}
+                name="categories"
+                buttonText={i.name.charAt(0).toUpperCase() + i.name.slice(1)}
+                icon={i.icon}
+              />
+            ))}
+          </FormOptionContainer>
         </Form>
       </FormWrapper>
     </FormContainer>
   );
 }
 
-const FormContainer = styled.div``;
+const FormContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const FormWrapper = styled.div`
-  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+`;
+
+const FormOptionContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3em;
 `;

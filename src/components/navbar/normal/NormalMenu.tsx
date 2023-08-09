@@ -74,7 +74,7 @@ export default function NormalMenu({
             isLoggedIn ? (
               <div className="user-menu-item">
                 {user.is_owner ? (
-                  <Link className="upload-room" to="/rooms/upload/">
+                  <Link className="upload-room" to="/rooms/upload/category/">
                     Upload Room
                   </Link>
                 ) : null}

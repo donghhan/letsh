@@ -6,6 +6,7 @@ interface IAmenities {
 interface ICategories {
   pk: number;
   name: string;
+  icon?: string;
 }
 
 interface IRoomTypes {

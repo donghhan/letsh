@@ -48,6 +48,10 @@ export const router = createBrowserRouter([
             path: "upload",
             element: <UploadRoomPage />,
           },
+          {
+            path: "upload/category",
+            element: <UploadRoomCategoryPage />,
+          },
         ],
       },
       {

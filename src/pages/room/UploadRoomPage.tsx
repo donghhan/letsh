@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
 import { useMutation } from "@tanstack/react-query";
 import useHostOnly from "../../hooks/useHostOnly";
@@ -7,6 +8,9 @@ import FormInput from "../../components/form/FormInput";
 import { uploadRoom } from "../../api/roomApi";
 import Button from "../../components/ui/button/Button";
 import ErrorMessage from "../../components/form/ErrorMessage";
+import { uploadRoomValidationSchema } from "./validation/uploadRoomValidation";
+import UploadRoomCategoryPage from "./UploadRoomCategoryPage";
+import { useState } from "react";
 
 interface IUploadRoom {
   name: string;
@@ -22,10 +26,34 @@ interface IUploadRoom {
 export default function UploadRoomPage() {
   useHostOnly();
 
+  const [activeStep, setActiveStep] = useState<number>(0);
+
   const mutation = useMutation(uploadRoom, {
     onSuccess: () => {},
     onError: () => {},
   });
+
+  const steps = ["name", "price"];
+
+  const getActiveStepContent = (stepIndex: number) => {
+    switch (stepIndex) {
+      case 0:
+        return <UploadRoomCategoryPage />;
+    }
+  };
+
+  const handleNext = () => {
+    setActiveStep((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    setActiveStep((prev) => prev - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
   const {
     register,
     handleSubmit,
@@ -35,57 +63,11 @@ export default function UploadRoomPage() {
 
   return (
     <UploadRoomSection>
-      <Form
-        formTitle="Fill out your information"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <FormInput
-          placeholder="Room name"
-          type="text"
-          id="name"
-          {...register("name")}
-          error={errors.name ? true : false}
-        />
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-        <FormInput
-          placeholder="Price per night"
-          type="text"
-          id="price"
-          {...register("price_per_night")}
-          error={errors.price_per_night ? true : false}
-        />
-        <FormInput
-          placeholder="Guest (in number)"
-          type="number"
-          id="guest"
-          {...register("guest")}
-          error={errors.guest ? true : false}
-        />
-        <FormInput
-          placeholder="Bedroom (in number)"
-          type="number"
-          id="bedroom"
-          {...register("bedroom")}
-          error={errors.bedroom ? true : false}
-        />
-        <FormInput
-          placeholder="Bathroom (in number)"
-          type="number"
-          id="bathroom"
-          {...register("bathroom")}
-          error={errors.bathroom ? true : false}
-        />
-        <div>
-          <label htmlFor="wifi">Wifi</label>
-          <input type="checkbox" />
-        </div>
-        <FormInput placeholder="Description" type="text" id="description" />
-        <Button
-          text="Submit"
-          $inverted={true}
-          style={{ width: "100%", height: "50px" }}
-        />
-      </Form>
+      {activeStep === steps.length ? (
+        <div>done</div>
+      ) : (
+        <div>{getActiveStepContent(activeStep)}</div>
+      )}
     </UploadRoomSection>
   );
 }

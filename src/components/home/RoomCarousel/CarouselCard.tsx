@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { IRoomType } from "../../../api/interfaces/rooms.interface";
+import { ICarouselRoomProp } from "../../../api/interfaces/rooms.interface";
 import notFound from "../../../assets/image_not_found.png";
 import LinkButton from "../../ui/button/LinkButton";
 
-interface CarouselCardButtonProp extends IRoomType {
+interface CarouselCardButtonProp extends ICarouselRoomProp {
   to: string;
 }
 
